@@ -1,0 +1,28 @@
+{
+	"init":{
+		"server": "127.0.0.1",
+		"user": "root",
+		"password": "root",
+		"dbname": "ta",
+		"port" : "3306"
+	},
+	"querys":{
+		"new":{
+			"quartier" : "INSERT INTO `quartier`(`name`, `path_pics`, `text`, `nb_videos`, `url`) VALUES (:name, :path, :text, 0, :url) ",
+			"artiste" : "INSERT INTO `artiste`(`name`, `path_pics`, `text`, `url`) VALUES (:name, :path, :text, :url) ",
+			"video" : "INSERT INTO `video`(`name`, `url`, `id_artiste`, `id_quartier`, `text`, `weekly`) VALUES (:name, :url, :id_artiste, :id_quartier, :text, :weekly)"
+		},
+		"get":{
+			"all_quartiers_name" : "SELECT `id`, `name` FROM `quartier` WHERE 1",
+			"all_videos" : "SELECT * FROM `video` WHERE 1",
+			"nb_videos" : "SELECT `nb_videos` FROM `quartier` WHERE `id`= :id_quartier",
+			"one_quartier_id" : "SELECT * FROM `quartier` WHERE `id` = :q_id",
+			"one_artiste_id" : "SELECT * FROM `artiste` WHERE `id` = :a_id",
+			"all_videos_weekly" : "SELECT `id` FROM `video` WHERE `weekly` = 1"
+		},
+		"update":{
+			"quartier_nb" : "UPDATE `quartier` SET `nb_videos`= :new_nb WHERE `id` = :id_quartier"
+			,"video_week" : "UPDATE `video` SET `weekly` = '0' WHERE `weekly` = 1"
+		}
+	}
+}
