@@ -10,7 +10,7 @@
 		"new":{
 			"quartier" : "INSERT INTO `quartier`(`name`, `path_pics`, `text`, `nb_videos`, `url`) VALUES (:name, :path, :text, 0, :url) ",
 			"artiste" : "INSERT INTO `artiste`(`name`, `path_pics`, `text`, `url`) VALUES (:name, :path, :text, :url) ",
-			"video" : "INSERT INTO `video`(`name`, `url`, `id_artiste`, `id_quartier`, `text`, `weekly`) VALUES (:name, :url, :id_artiste, :id_quartier, :text, :weekly)"
+			"video" : "INSERT INTO `video`(`name`, `url`, `id_artiste`, `id_quartier`, `text`, `weekly`, `category`) VALUES (:name, :url, :id_artiste, :id_quartier, :text, :weekly, :category)"
 		},
 		"get":{
 			"all_quartiers_name" : "SELECT `id`, `name` FROM `quartier` WHERE 1",

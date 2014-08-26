@@ -20,7 +20,8 @@ elseif (isset($_POST['new_post'])) {
 		mkdir($path);
 	$id_a = $bdd->new_artiste($_POST['artiste_name'], $path, $_POST['artiste_desc'], $_POST['artiste_url']);
 	$weekly = (isset($_POST['weekly']) ? 1 : 0);
-	$bdd->new_video($_POST['video_name'], $_POST['video_desc'], $_POST['video_url'], $id_a, $_POST['quartier_id'], $weekly);
+	$category = (isset($_POST['visiteur']) ? 1 : 0);
+	$bdd->new_video($_POST['video_name'], $_POST['video_desc'], $_POST['video_url'], $id_a, $_POST['quartier_id'], $weekly, $category);
 }
 ?>
 <!DOCTYPE html>

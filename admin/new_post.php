@@ -1,4 +1,10 @@
 <?php 
+/*
+	TO DO :
+	Rendre TOUT les champs obligatoire. Rendre le bouton inclickable sinon (jquery)
+	Améliorer la lisibilité du bouton de choix de quartier.
+*/
+
 
 spl_autoload_register(function ($class) {
 	include __DIR__.'/../classes/' . $class . '_class.php';
@@ -49,7 +55,8 @@ foreach ($quartiers as $q) {
 		</div>
 		<div id="sub_form" class="jumbotron">
 			<input type="checkbox" name="weekly" value="yes" checked> Vidéo de la semaine?<br>
-			<button class="v btn btn-warning" type="submit" name="new_post">Add it</button>
+			<input type="checkbox" name="visiteur" value="yes" > Visiteur?<br>
+			<button class="sub btn btn-warning" type="submit" name="new_post">Add it</button>
 		</div>	
 	</form>
 	<script src="../components/jquery.js"></script>

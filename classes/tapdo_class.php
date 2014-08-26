@@ -72,7 +72,7 @@ class tapdo
 		return $this->_con->lastInsertId();
 	}
 
-	public function new_video($name, $text, $url, $id_artiste, $id_quartier, $weekly)
+	public function new_video($name, $text, $url, $id_artiste, $id_quartier, $weekly, $cat)
 	{
 		$this->_con->beginTransaction();
 
@@ -99,7 +99,8 @@ class tapdo
 			,"id_artiste" => $id_artiste
 			,"id_quartier" => $id_quartier
 			,"text" => $text
-			,"weekly"=> $weekly);
+			,"weekly"=> $weekly
+			,"category" => $cat);
 		$prep->execute($vars);
 
 		$q = $this->_querys->get->nb_videos;
