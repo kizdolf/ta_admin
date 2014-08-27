@@ -33,7 +33,7 @@ foreach ($quartiers as $q) {
 			<h4><a href="new_quartier.php">Ou en créer un nouveau</a></h4>
 			<?php echo $html; ?>
 		</div>
-	<form method="post" action="./index.php" >
+	<form method="post" action="./index.php" enctype="multipart/form-data">
 		<input type="hidden" id="quartier_id" name="quartier_id">
 		<div id="float_form" class="span4">
 			<h3>Artiste</h3>
@@ -43,6 +43,10 @@ foreach ($quartiers as $q) {
 			<textarea name="artiste_desc" rows="5" cols="30" class="input-large"></textarea>
 			<p>Site Web : </p>
 			<input type="text" class="input-large" name="artiste_url">
+			<div id="upload">
+				<h3>Photos</h3>
+				<input type="file" multiple="multiple" name="pics[]" id="pics"> <br>
+			</div>
 		</div>
 		<div id="float_form" class="span4">
 			<h3>video</h3>

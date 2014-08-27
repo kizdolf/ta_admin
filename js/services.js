@@ -48,6 +48,13 @@
 				}
 				return $sce.trustAsHtml(frame);
 			}
+		}])
+
+		.service('pics', ['$http', function($http){
+
+			this.list_pics = function(path){
+				return $http.get('API/api.php?get=pics&path=' + path);
+			}
 		}]);
 
 })();

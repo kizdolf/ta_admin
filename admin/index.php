@@ -3,26 +3,29 @@
 spl_autoload_register(function ($class) {
 	include __DIR__.'/../classes/' . $class . '_class.php';
 });
+require_once(__DIR__."/admin_functions.php");
 $bdd = new tapdo();
+
 $post = $bdd->get_all_post();
 if (isset($_POST['new_quartier'])) {
-	//creation path:
 	$path = "../portfolio/quartiers/".$_POST['quartier_name'];
 	if (!is_dir($path))
 		mkdir($path);
-	//save in bdd:
-	
+ 	pics_handler($_FILES, $path, $_POST['quartier_name']);
 	$id = $bdd->new_quartier($_POST['quartier_name'], $path, $_POST['quartier_desc'], $_POST['quartier_url']);
 }
 elseif (isset($_POST['new_post'])) {
 	$path = "../portfolio/artistes/" . $_POST['artiste_name'];
 	if (!is_dir($path))
 		mkdir($path);
+ 	pics_handler($_FILES, $path, $_POST['artiste_name']);
 	$id_a = $bdd->new_artiste($_POST['artiste_name'], $path, $_POST['artiste_desc'], $_POST['artiste_url']);
 	$weekly = (isset($_POST['weekly']) ? 1 : 0);
 	$category = (isset($_POST['visiteur']) ? 1 : 0);
 	$bdd->new_video($_POST['video_name'], $_POST['video_desc'], $_POST['video_url'], $id_a, $_POST['quartier_id'], $weekly, $category);
 }
+
+
 ?>
 <!DOCTYPE html>
 <html>

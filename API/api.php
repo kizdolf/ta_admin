@@ -64,11 +64,26 @@ Helpers
 				print_r(json_encode($related));
 				break;
 			default:
-				# code...
+				return "Unsuported feature. (or bug). Please contact webmaster.";
 				break;
 		}
-		// $videos = $bdd->get_videos_from($from, $type_id, $id);
-		// $bdd->get_vide
+	}
+
+	function get_pics($path)
+	{
+		$imgpath = explode("../", $path);
+		$imgpath = $imgpath[1];
+		if(!is_dir($path))
+			die('Wrong patern.');
+		$handle = opendir($path);
+		$files = array();
+		// $path = explode("../", $path);
+		// $path= $path[0];
+		while ($entry = readdir($handle)){
+			if($entry!= "." && $entry != "..")
+				$files[] = $imgpath . "/" . $entry;
+		}
+		print_r(json_encode($files));
 	}
 /*
 Inputs.
@@ -78,26 +93,28 @@ Inputs.
 			print_r(json_encode($bdd->get_weekly_post()));
 			break;
 		case 'quartiers':
-			if (isset($param)) {
+			if (isset($param))
 				print_r(json_encode($bdd->get_quartiers($param)));
-			}
-			else{
+			else
 				print_r(json_encode($bdd->get_quartiers()));
-			}
 			break;
 		case 'artistes':
-			if (isset($param)) {
+			if (isset($param))
 				print_r(json_encode($bdd->get_artistes($param)));
-			}
-			else{
+			else
 				print_r(json_encode($bdd->get_artistes()));
-			}
 			break;
 		case 'related':
 			if(!isset($_GET['from']) || !isset($_GET['type_id']) || !isset($_GET['id']))
 				echo "Wrong request";
 			else
 				return related($_GET['from'], $_GET['type_id'], $_GET['id'], $bdd);
+			break;
+		case 'pics':
+			if(!isset($_GET['path']))
+				echo "Wrong request";
+			else
+				get_pics($_GET['path']);
 			break;
 		default:
 			echo "Wrong request";

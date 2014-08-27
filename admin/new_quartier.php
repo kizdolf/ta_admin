@@ -6,7 +6,7 @@
 </head>
 <body>
 	<h2>Nouveau quartier</h2>
-	<form method="post" action="./index.php" >
+	<form method="post" action="./index.php"  enctype="multipart/form-data">
 		<div id="float_form" class="span4">
 			<p>Nom : </p>
 			<input type="text" class="input-large" name="quartier_name"\>
@@ -14,6 +14,10 @@
 			<textarea name="quartier_desc" rows="5" cols="30" class="input-large"></textarea>
 			<p>Site Web : </p>
 			<input type="text" class="input-large" name="quartier_url">
+		</div>
+		<div id="upload">
+			<h3>Photos</h3>
+			<input type="file" multiple="multiple" name="pics[]" id="pics"> <br>
 		</div>
 		<div id="sub_form" class="jumbotron">
 			<button class="v btn btn-warning" type="submit" name="new_quartier">Add it</button>

@@ -40,15 +40,11 @@ angular.module('myApp.controllers', [])
 .controller('quartierCtrl', ['tools', 'getData', '$scope', '$routeParams', '$http', '$sce', function(tools, getData, $scope, $routeParams, $http, $sce){
 
 	getData.related('quartier', 'name', $routeParams.id).then(function(data){
-		console.log(data.data);
 		$scope.quartier = data.data;
 		for (var i in $scope.quartier.videos){
 			$scope.quartier.videos[i].frame = tools.iframe($scope.quartier.videos[i].url);
 		}
 	});
-
-
-
 }])
 
 .controller('quartiersCtrl', ['getData', '$scope', '$routeParams', '$http', '$sce', function(getData, $scope, $routeParams, $http, $sce){
@@ -58,6 +54,19 @@ angular.module('myApp.controllers', [])
 	});
 }])
 
-.controller('picsCtrl', ['$scope', '$routeParams', '$http', '$sce', function($scope, $routeParams, $http, $sce){
+.controller('picsCtrl', ['pics', 'getData', '$scope', '$routeParams', '$http', '$sce', function(pics, getData, $scope, $routeParams, $http, $sce){
 
+	getData.artistes('').then(function(data){
+		$scope.artistes = data.data;
+	});
+
+	getData.quartiers('').then(function(data){
+		$scope.quartiers = data.data;
+	});
+
+	$scope.name_click = function(path){
+		pics.list_pics(path).then(function(data){
+			$scope.test = data.data;
+		});
+	};
 }]);

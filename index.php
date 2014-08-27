@@ -6,6 +6,7 @@
 	<title>Toulouse Acoustics </title>
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" type="text/css" href="css/bootstrap/css/bootstrap.min.css">
+  <base href="/public/adminta/">
 </head>
 <body>
   <div id="header" class="page-header">
@@ -68,7 +69,9 @@
 	by DonKino. all rights are reserved but do what you want also :)
 </div> -->
 
-
+<div id="playerSound">
+<iframe width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/49488549&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
+</div>
   <script src="components/angular.min.js"></script>
   <script src="components/angular_routes.js"></script>
   <script src="components/jquery.js"></script>

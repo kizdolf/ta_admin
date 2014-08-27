@@ -2,7 +2,7 @@
 
 angular.module('myApp.routes', ['ngRoute'])
 
-.config(['$routeProvider', function($routeProvider){
+.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
 
 	$routeProvider.when('/home', {
 		templateUrl: 'views/home.html',
@@ -55,6 +55,7 @@ angular.module('myApp.routes', ['ngRoute'])
 		redirectTo: '/home'
 	});
 
-
+	// use the HTML5 History API
+	$locationProvider.html5Mode(true);
 
 }]);

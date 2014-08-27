@@ -44,3 +44,7 @@ iframe {
 	display: block;
 	height: 140px;
 }
+
+#playerSound{
+	width: 50%;
+}
