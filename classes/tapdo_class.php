@@ -54,7 +54,7 @@ class tapdo
 		return $this->_con->lastInsertId();
 	}
 
-	public function new_artiste($name, $path, $text, $url = "")
+	public function new_artiste($name, $path, $text, $url = "", $itw)
 	{
 		$verif_q = "SELECT `id` FROM `artiste` WHERE `name`='$name'";
 		$prep = $this->_con->prepare($verif_q);
@@ -69,7 +69,8 @@ class tapdo
 			"name" => $name
 			,"path" => $path
 			,"text" => $text
-			,"url" => $url);
+			,"url" => $url
+			,"itw" => $itw);
 		$prep->execute($vars);
 		return $this->_con->lastInsertId();
 	}

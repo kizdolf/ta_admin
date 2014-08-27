@@ -43,6 +43,8 @@ foreach ($quartiers as $q) {
 			<textarea name="artiste_desc" rows="5" cols="30" class="input-large"></textarea>
 			<p>Site Web : </p>
 			<input type="text" class="input-large" name="artiste_url">
+			<p>Itw sounclound</p>
+			<input type="text" class="input-large" name="itw">
 			<div id="upload">
 				<h3>Photos</h3>
 				<input type="file" multiple="multiple" name="pics[]" id="pics"> <br>

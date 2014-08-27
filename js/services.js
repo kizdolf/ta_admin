@@ -47,7 +47,15 @@
 					return "unsupported source. Contact webmaster.";
 				}
 				return $sce.trustAsHtml(frame);
-			}
+			};
+
+			this.soundcloud = function(url, idDOM){
+				SC.initialize({
+					client_id: "8a6b0e256518b81a23f4b8457c34ff6e",
+				});
+				SC.oEmbed(url, {auto_play: false}, document.getElementById(idDOM));
+
+			};
 		}])
 
 		.service('pics', ['$http', function($http){

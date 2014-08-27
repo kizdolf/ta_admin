@@ -4,6 +4,7 @@ spl_autoload_register(function ($class) {
 	include __DIR__.'/../classes/' . $class . '_class.php';
 });
 require_once(__DIR__."/admin_functions.php");
+session_start();
 $bdd = new tapdo();
 
 $post = $bdd->get_all_post();
@@ -19,7 +20,7 @@ elseif (isset($_POST['new_post'])) {
 	if (!is_dir($path))
 		mkdir($path);
  	pics_handler($_FILES, $path, $_POST['artiste_name']);
-	$id_a = $bdd->new_artiste($_POST['artiste_name'], $path, $_POST['artiste_desc'], $_POST['artiste_url']);
+	$id_a = $bdd->new_artiste($_POST['artiste_name'], $path, $_POST['artiste_desc'], $_POST['artiste_url'], $_POST['itw']);
 	$weekly = (isset($_POST['weekly']) ? 1 : 0);
 	$category = (isset($_POST['visiteur']) ? 1 : 0);
 	$bdd->new_video($_POST['video_name'], $_POST['video_desc'], $_POST['video_url'], $id_a, $_POST['quartier_id'], $weekly, $category);

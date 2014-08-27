@@ -80,6 +80,7 @@
   <script src="js/routes.js"></script>
   <script src="js/jque.js"></script>
   <script src="js/services.js"></script>
+  <script src="//connect.soundcloud.com/sdk.js"></script>
   
 </body>
 </html>
