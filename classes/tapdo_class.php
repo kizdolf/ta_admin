@@ -260,10 +260,25 @@ class tapdo
 		$this->_con->commit();
 		return($ret[0]);
 	}
+
 	public function get_one_quartier($col, $val)
 	{
 		$this->_con->beginTransaction();
 		$t = "one_quartier_".$col;
+		$q = $this->_querys->get->$t;
+		$prep = $this->_con->prepare($q);
+		$prep->execute(array($val));
+		$ret = array();
+		while ($res = $prep->fetch(PDO::FETCH_ASSOC))
+			$ret[] = $res;
+		$this->_con->commit();
+		return($ret[0]);
+	}
+
+	public function get_one_video($col, $val)
+	{
+		$this->_con->beginTransaction();
+		$t = "one_video_".$col;
 		$q = $this->_querys->get->$t;
 		$prep = $this->_con->prepare($q);
 		$prep->execute(array($val));
@@ -286,6 +301,30 @@ class tapdo
 			$ret[] = $res;
 		$this->_con->commit();
 		return($ret);
+	}
+
+	public function user_exist($name, $password)
+	{
+		$this->_con->beginTransaction();
+		$q = $this->_querys->user->user_exist;
+		$prep = $this->_con->prepare($q);
+		$prep->execute(array("name" => $name, "hash" => $password));
+		$nb = $prep->rowCount();
+		$this->_con->commit();
+		if($nb != 0)
+			return true;
+		return false;
+	}
+
+	public function update_one($table, $col, $val, $entry)
+	{
+		$this->_con->beginTransaction();
+		$q = "one_".$table."_by_".$col;
+		$q = $this->_querys->update->$q;
+		$prep = $this->_con->prepare($q);
+		$entry['id_where'] = $entry['id'];
+		$prep->execute($entry);
+		$this->_con->commit();
 	}
 }
 

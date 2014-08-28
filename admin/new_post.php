@@ -9,6 +9,11 @@
 spl_autoload_register(function ($class) {
 	include __DIR__.'/../classes/' . $class . '_class.php';
 });
+$log = new log();
+
+if (!$log->is_logued()) {
+	header('Location: login.php?case=disconnect');
+}
 
 $bdd = new tapdo();
 $quartiers = $bdd->get_all_quartiers_name();
@@ -25,6 +30,7 @@ foreach ($quartiers as $q) {
 <head>
 	<meta charset="utf-8">
 	<title>Ajouter un post</title>
+	<script src="../components/ckeditor/ckeditor.js"></script>
 </head>
 <body>
 	<h2>Nouveau post</h2>
@@ -40,7 +46,8 @@ foreach ($quartiers as $q) {
 			<p>Nom : </p>
 			<input type="text" class="input-large" name="artiste_name"\>
 			<p>Texte : </p>
-			<textarea name="artiste_desc" rows="5" cols="30" class="input-large"></textarea>
+			<textarea id="ck_a" name="artiste_desc" rows="5" cols="30" class="input-large"></textarea>
+			<script>CKEDITOR.replace( 'ck_a' );</script>
 			<p>Site Web : </p>
 			<input type="text" class="input-large" name="artiste_url">
 			<p>Itw sounclound</p>
@@ -55,7 +62,8 @@ foreach ($quartiers as $q) {
 			<p>Nom : </p>
 			<input type="text" class="input-large" name="video_name"\>
 			<p>Texte : </p>
-			<textarea name="video_desc" rows="5" cols="30" class="input-large"></textarea>
+			<textarea id="ck_v" name="video_desc" rows="5" cols="30" class="input-large"></textarea>
+			<script>CKEDITOR.replace( 'ck_v' );</script>
 			<p>url : </p>
 			<input type="text" class="input-large" name="video_url">
 		</div>
