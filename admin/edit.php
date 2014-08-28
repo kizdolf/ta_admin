@@ -20,10 +20,15 @@ $id = $_GET['id'];
 	<title>Edit</title>
 	<meta charset="utf-8">
 	<script src="../components/ckeditor/ckeditor.js"></script>
+  	<link rel="stylesheet" type="text/css" href="../css/bootstrap/css/bootstrap.min.css">
+	<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
 </head>
 <body>
+	<?php include('menu.html'); ?>
 
 <?php
+
 if ($_GET['type'] == "valid_edit") {
 	$get = "get_one_".$_GET['table'];
 	$entry = $bdd->$get('id', $id);

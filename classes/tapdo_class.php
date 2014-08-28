@@ -164,7 +164,8 @@ class tapdo
 			,"text" =>$video['text']
 			,"url" => $video['url']
 			,"date" => $video['date_creation']
-			,"weekly" => $video['weekly']);
+			,"weekly" => $video['weekly']
+			,"category" => $video['category']);
 		$post['artiste'] = array(
 			"id" => $artiste['id']
 			,"name" => $artiste['name']
@@ -318,12 +319,20 @@ class tapdo
 
 	public function update_one($table, $col, $val, $entry)
 	{
-		$this->_con->beginTransaction();
+		$this->_con->beginTransaction(); 
+
+		if ($table == 'video' && $entry['weekly'] == 1) {
+			$qu = $this->_querys->update->video_week;
+			$p = $this->_con->prepare($qu);
+			$p->execute();
+		}
+
 		$q = "one_".$table."_by_".$col;
 		$q = $this->_querys->update->$q;
 		$prep = $this->_con->prepare($q);
 		$entry['id_where'] = $entry['id'];
 		$prep->execute($entry);
+
 		$this->_con->commit();
 	}
 }

@@ -4,8 +4,13 @@
 	<meta charset="utf-8">
 	<title>Ajouter un quartier</title>
 	<script src="../components/ckeditor/ckeditor.js"></script>
+  	<link rel="stylesheet" type="text/css" href="../css/bootstrap/css/bootstrap.min.css">
+	<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
 </head>
 <body>
+	<?php include('menu.html'); ?>
+
 	<h2>Nouveau quartier</h2>
 	<form method="post" action="./index.php"  enctype="multipart/form-data">
 		<div id="float_form" class="span4">

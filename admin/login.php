@@ -22,6 +22,7 @@ if (isset($_GET['case'])) {
 <html>
 <head>
 	<title>Login admin TA</title>
+  	<link rel="stylesheet" type="text/css" href="../css/bootstrap/css/bootstrap.min.css">
 	<meta charset="utf-8">
 </head>
 <body>
