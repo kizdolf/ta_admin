@@ -335,6 +335,23 @@ class tapdo
 
 		$this->_con->commit();
 	}
+
+	public function up_user_visit($login)
+	{
+		$this->_con->beginTransaction(); 
+		
+		$q = $this->_querys->get->nb_visits_user_by_name;
+		$prep=$this->_con->prepare($q);
+		$prep->execute(array($login));
+		$res = $prep->fetch(PDO::FETCH_ASSOC);
+		$res = $res['nb_visits'] + 1;
+		
+		$q = $this->_querys->update->user_nb_visits;
+		$prep=$this->_con->prepare($q);
+		$prep->execute(array($res, $login));
+		
+		$this->_con->commit();
+	}
 }
 
 ?>

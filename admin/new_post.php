@@ -1,11 +1,4 @@
 <?php 
-/*
-	TO DO :
-	Rendre TOUT les champs obligatoire. Rendre le bouton inclickable sinon (jquery)
-	Améliorer la lisibilité du bouton de choix de quartier.
-*/
-
-
 spl_autoload_register(function ($class) {
 	include __DIR__.'/../classes/' . $class . '_class.php';
 });
@@ -13,13 +6,13 @@ $log = new log();
 
 if (!$log->is_logued()) {
 	header('Location: login.php?case=disconnect');
-}
+}else{
 
 $bdd = new tapdo();
 $quartiers = $bdd->get_all_quartiers_name();
 $html = "";
 foreach ($quartiers as $q) {
-	$html .= "<button value='" .  $q['id'] . "' class='quartier_choix'>" . $q['name'] . "</button>";
+	$html .= "<button value='" .  $q['id'] . "' class='quartier_choix btn btn-default'>" . $q['name'] . "</button>";
 }
 
 
@@ -37,56 +30,99 @@ foreach ($quartiers as $q) {
 </head>
 <body>
 	<?php include('menu.html'); ?>
-
+	<div class="container">
 	<h2>Nouveau post</h2>
 		<div>
-			<h3>Choisir un quartier.</h3>
-			<h4><a href="new_quartier.php">Ou en créer un nouveau</a></h4>
+			<h3>Choisir un quartier</h3>
+			<div class="btn-group">
+			<a class='btn btn-warning' href="new_quartier.php">nouveau</a>
 			<?php echo $html; ?>
+			</div>
 		</div>
 	<form method="post" action="./index.php" enctype="multipart/form-data">
 		<input type="hidden" id="quartier_id" name="quartier_id">
-		<div id="float_form" class="span4">
-			<h3>Artiste</h3>
-			<p>Nom : </p>
-			<input type="text" class="input-large" name="artiste_name"\>
+		<div id="float_form" class="input-group input-group-lg">
+			<div class='page-header'>
+				<h2>Artiste</h2>
+			</div>
+			<input type="text" class="form-control" name="artiste_name" placeholder="nom">
+			<hr>
+			<div id="float_form" class="input-group input-group-lg">
+				<span class="input-group-addon">@</span>
+				<input type="text" class="form-control" name="artiste_url" placeholder="url de l'artiste">
+			</div>
 			<p>Texte : </p>
-			<textarea id="ck_a" name="artiste_desc" rows="5" cols="30" class="input-large"></textarea>
+			<textarea id="ck_a" name="artiste_desc" rows="5" cols="30" class="form-control"></textarea>
 			<script>CKEDITOR.replace( 'ck_a' );</script>
-			<p>Site Web : </p>
-			<input type="text" class="input-large" name="artiste_url">
-			<p>Itw sounclound</p>
-			<input type="text" class="input-large" name="itw">
-			<div id="upload">
+
+			<div id="float_form" class="input-group input-group-lg">
+				<span class="input-group-addon">@</span>
+				<input type="text" class="form-control" name="itw" placeholder='Itw sounclound'>
+			</div>
+			<div id="upload" class="jumbotron">
 				<h3>Photos</h3>
 				<input type="file" multiple="multiple" name="pics[]" id="pics"> <br>
 			</div>
 		</div>
-		<div id="float_form" class="span4">
-			<h3>video</h3>
-			<p>Nom : </p>
-			<input type="text" class="input-large" name="video_name"\>
+		<div id="float_form" class="input-group input-group-lg">
+			<div class="page-header">
+				<h2>video</h2>
+			</div>
+			<input type="text" class="form-control" name="video_name" placeholder="nom">
+			<div id="float_form" class="input-group input-group-lg">
+				<span class="input-group-addon">@</span>
+				<input type="text" class="form-control" name="video_url">
+			</div>
 			<p>Texte : </p>
-			<textarea id="ck_v" name="video_desc" rows="5" cols="30" class="input-large"></textarea>
+			<textarea id="ck_v" name="video_desc" rows="5" cols="30" class="form-control"></textarea>
 			<script>CKEDITOR.replace( 'ck_v' );</script>
-			<p>url : </p>
-			<input type="text" class="input-large" name="video_url">
 		</div>
 		<div id="sub_form" class="jumbotron">
 			<input type="checkbox" name="weekly" value="yes" checked> Vidéo de la semaine?<br>
 			<input type="checkbox" name="visiteur" value="yes" > Visiteur?<br>
-			<button class="sub btn btn-warning" type="submit" name="new_post">Add it</button>
+		</div>	
+		<div class="alert alert-danger" role="alert">Heu.. Je crois qu'il manque un truc. Faudrais vérifier!</div>
+		<div id="sub_form">
+			<button class="btn btn-lg btn-success valid" type="submit" name="new_post">Add it</button>
 		</div>	
 	</form>
+	</div>
 	<script src="../components/jquery.js"></script>
 	<script type="text/javascript">
 
+	$check = function(){
+		$('input').each(function(){
+			if($(this).val() == ''){
+				$(this).addClass('missing');
+				$('.valid').hide();
+				$('.alert').show();
+			}
+			else{
+				$(this).removeClass('missing');
+			}
+		});
+	};
+
+	$check();
+
 	$(".quartier_choix").click(function(){
 		$val = $(this).val();
-		$(this).append(" => checked.");
+		$('.quartier_choix').each(function(){
+			$(this).removeClass('btn-success')
+		})
+		$(this).addClass('btn-success');
 		$("#quartier_id").val($val);
+	});
+
+	
+
+	$('input').change(function(){
+		$('.valid').show();
+		$('.alert').hide();
+		$check();
 	});
 
 	</script>
 </body>
 </html>
+<?php } ?>

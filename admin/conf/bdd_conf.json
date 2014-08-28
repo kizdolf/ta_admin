@@ -27,6 +27,7 @@
 			,"all_videos_from_id_artiste" : "SELECT * FROM `video` WHERE `id_artiste` = ?"
 			,"all_videos_from_id_quartier" : "SELECT * FROM `video` WHERE `id_quartier` = ?"
 			,"quartier_id" : "SELECT * FROM `quartier` WHERE `id` = :id_quartier"
+			,"nb_visits_user_by_name" : "SELECT `nb_visits` FROM `user` WHERE `ta_login` = ?"
 		},
 		"update":{
 			"quartier_nb" : "UPDATE `quartier` SET `nb_videos`= :new_nb WHERE `id` = :id_quartier"
@@ -34,6 +35,7 @@
 			,"one_video_by_id" : "UPDATE `video` SET `id`=:id,`date_creation`=:date_creation,`date_update`=:date_update,`category`=:category,`name`=:name,`url`=:url,`id_artiste`=:id_artiste,`id_quartier`=:id_quartier,`text`=:text,`weekly`=:weekly WHERE `id`=:id_where"
 			,"one_quartier_by_id" : "UPDATE `quartier` SET `id`=:id,`date_creation`=:date_creation,`date_update`=:date_update,`name`=:name,`path_pics`=:path_pics,`text`=:text,`nb_videos`=:nb_videos,`url`=:url WHERE `id`=:id_where"
 			,"one_artiste_by_id" : "UPDATE `artiste` SET `id`=:id,`date_creation`=:date_creation,`date_update`=:date_update,`name`=:name,`path_pics`=:path_pics,`text`=:text,`url`=:url,`itw`=:itw WHERE `id`=:id_where"
+			,"user_nb_visits" : "UPDATE `user` SET `nb_visits`= ? WHERE `ta_login`= ?"
 		},
 		"user" : {
 			"user_exist" : "SELECT `id` FROM `user` WHERE `ta_login`= :name AND `ta_password` = :hash"

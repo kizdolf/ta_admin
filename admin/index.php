@@ -74,8 +74,8 @@ if (isset($_GET['done'])){
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
 	<title>admin</title>
+	<meta charset="utf-8">
 	<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
   	<link rel="stylesheet" type="text/css" href="../css/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>

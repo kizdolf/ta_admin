@@ -9,10 +9,14 @@ spl_autoload_register(function ($class) {
 class log
 {
 	private $_bdd; /* ctapdo class, gère la bdd.*/
-	
+	private $_querys;
+
 	function __construct()
 	{
 		$this->_bdd = new tapdo();
+		$file = __DIR__ . "/../admin/conf/bdd_conf.json";
+		$conf = json_decode(file_get_contents($file));
+		$this->_querys = $conf->querys;
 	}
 
 	public function is_logued()
@@ -48,6 +52,7 @@ class log
 		}
 		else
 			setcookie("session", $to_save, time()+3600);
+		$this->_bdd->up_user_visit($login);
 	}
 
 	public function unset_session()

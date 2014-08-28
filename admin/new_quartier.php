@@ -1,3 +1,12 @@
+<?php 
+spl_autoload_register(function ($class) {
+	include __DIR__.'/../classes/' . $class . '_class.php';
+});
+$log = new log();
+
+if (!$log->is_logued()) {
+	header('Location: login.php?case=disconnect');
+}else{ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,25 +19,32 @@
 </head>
 <body>
 	<?php include('menu.html'); ?>
-
+	<div class="container">
 	<h2>Nouveau quartier</h2>
 	<form method="post" action="./index.php"  enctype="multipart/form-data">
-		<div id="float_form" class="span4">
-			<p>Nom : </p>
-			<input type="text" class="input-large" name="quartier_name"\>
+		<div id="float_form" class="input-group input-group-lg">
+			<input type="text" class="form-control" name="quartier_name" placeholder='Nom'>
+		</div>
+		<hr>
+		<div>
 			<p>Texte : </p>
 			<textarea name="quartier_desc" rows="5" cols="30" class="input-large" id="ck"></textarea>
-			<script>CKEDITOR.replace( 'ck' );</script>
-			<p>Site Web : </p>
-			<input type="text" class="input-large" name="quartier_url">
+			<script> CKEDITOR.replace( 'ck' ); </script>
 		</div>
-		<div id="upload">
+		<hr>
+		<div id="float_form" class="input-group input-group-lg">
+			<span class="input-group-addon">@</span>
+			<input type="text" class="form-control" name="quartier_url" placeholder='Site Web '>
+		</div>
+		<div id="upload" class="jumbotron">
 			<h3>Photos</h3>
 			<input type="file" multiple="multiple" name="pics[]" id="pics"> <br>
 		</div>
-		<div id="sub_form" class="jumbotron">
-			<button class="v btn btn-warning" type="submit" name="new_quartier">Add it</button>
+		<div id="sub_form">
+			<button class="btn btn-lg btn-success valid" type="submit" name="new_quartier">Add it</button>
 		</div>	
 	</form>
+	</div>
 </body>
 </html>
+<?php } ?>

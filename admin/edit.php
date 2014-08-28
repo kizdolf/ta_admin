@@ -6,7 +6,7 @@ require_once('admin_functions.php');
 $log = new log();
 if (!$log->is_logued()) {
 	header('Location: login.php?case=disconnect');
-}
+}else{
 if (!isset($_GET['type']) || !isset($_GET['id'])) {
 	header('Location: index.php?wrong=edition');
 }
@@ -56,3 +56,4 @@ else{
 
 </body>
 </html>
+<?php } ?>
