@@ -19,11 +19,8 @@ if (isset($_POST['login_sub']) && isset($_POST['login']) && isset($_POST['passwo
 	 	header('Location: login.php?case=logs');
 	}else{
 		$message.= "<h2>Welcome ".$_POST['login']."</h2><br>";
-		if(isset($_POST['trust']))
-			$trust = true;
-		else
-			$trust = false;
-		$log->set_session($_POST['login'], $_POST['password'], $trust);
+		$trust = (isset($_POST['trust']))? true : false;
+		$id_admin = $log->set_session($_POST['login'], $_POST['password'], $trust);
 	}
 }
 elseif (!$log->is_logued()) {
@@ -82,7 +79,7 @@ if (isset($_GET['done'])){
 	<script src="../components/jquery.js"></script>
 </head>
 <body>
-	<?php include('menu.html'); ?>
+	<?php include('menu.php'); ?>
 	<div id="messages" class="jumbotron"><?php echo $message; ?></div>
 	<div><hr>
 		<?php 

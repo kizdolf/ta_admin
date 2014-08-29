@@ -29,7 +29,7 @@ foreach ($quartiers as $q) {
 	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
 </head>
 <body>
-	<?php include('menu.html'); ?>
+	<?php include('menu.php'); ?>
 	<div class="container">
 	<h2>Nouveau post</h2>
 		<div>

@@ -290,6 +290,20 @@ class tapdo
 		return($ret[0]);
 	}
 
+	public function get_one_user($col, $val)
+	{
+		$this->_con->beginTransaction();
+		$t = "one_user_".$col;
+		$q = $this->_querys->get->$t;
+		$prep = $this->_con->prepare($q);
+		$prep->execute(array($val));
+		$ret = array();
+		while ($res = $prep->fetch(PDO::FETCH_ASSOC))
+			$ret[] = $res;
+		$this->_con->commit();
+		return($ret[0]);
+	}
+
 	public function get_videos_related($col, $val)
 	{
 		$this->_con->beginTransaction();
@@ -344,12 +358,28 @@ class tapdo
 		$prep=$this->_con->prepare($q);
 		$prep->execute(array($login));
 		$res = $prep->fetch(PDO::FETCH_ASSOC);
-		$res = $res['nb_visits'] + 1;
+		$nb = $res['nb_visits'] + 1;
 		
 		$q = $this->_querys->update->user_nb_visits;
 		$prep=$this->_con->prepare($q);
-		$prep->execute(array($res, $login));
+		$prep->execute(array($nb, $login));
 		
+		$this->_con->commit();
+		return $res['id'];
+	}
+
+	public function update_one_user($vars)
+	{
+		$this->_con->beginTransaction(); 
+		
+		$q = $this->_querys->update->one_user_by_id;
+		$prep=$this->_con->prepare($q);
+		$vars['id_where'] = $vars['id'];
+		echo "<pre>";
+		print_r($vars);
+		echo "</pre>";
+		$prep->execute($vars);
+
 		$this->_con->commit();
 	}
 }

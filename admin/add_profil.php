@@ -20,7 +20,7 @@ if (!$log->is_logued()) {
 	<script src="../components/jquery.js"></script>
 </head>
 <body>
-	<?php include('menu.html'); ?>
+	<?php include('menu.php'); ?>
 
 <h2>Faire le formulaire complet... </h2>
 </body>

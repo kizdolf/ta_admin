@@ -25,7 +25,7 @@ $id = $_GET['id'];
 	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
 </head>
 <body>
-	<?php include('menu.html'); ?>
+	<?php include('menu.php'); ?>
 
 <?php
 

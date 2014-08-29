@@ -20,6 +20,8 @@
 			,"one_video_id" : "SELECT * FROM `video` WHERE `id` = ?"
 			,"one_artiste_id" : "SELECT * FROM `artiste` WHERE `id` = ?"
 			,"one_artiste_name" : "SELECT * FROM `artiste` WHERE `name` = ?"
+			,"one_user_id" : "SELECT * FROM `user` WHERE `id` = ?"
+			,"one_user_ta_login" : "SELECT * FROM `user` WHERE `ta_login` = ?"
 			,"one_quartier_name" : "SELECT * FROM `quartier` WHERE `name` = ?"
 			,"all_videos_weekly_id" : "SELECT `id` FROM `video` WHERE `weekly` = 1"
 			,"artiste_id" : "SELECT * FROM `artiste` WHERE `id` = :id_artiste"
@@ -27,7 +29,7 @@
 			,"all_videos_from_id_artiste" : "SELECT * FROM `video` WHERE `id_artiste` = ?"
 			,"all_videos_from_id_quartier" : "SELECT * FROM `video` WHERE `id_quartier` = ?"
 			,"quartier_id" : "SELECT * FROM `quartier` WHERE `id` = :id_quartier"
-			,"nb_visits_user_by_name" : "SELECT `nb_visits` FROM `user` WHERE `ta_login` = ?"
+			,"nb_visits_user_by_name" : "SELECT `nb_visits`, `id` FROM `user` WHERE `ta_login` = ?"
 		},
 		"update":{
 			"quartier_nb" : "UPDATE `quartier` SET `nb_videos`= :new_nb WHERE `id` = :id_quartier"
@@ -35,6 +37,7 @@
 			,"one_video_by_id" : "UPDATE `video` SET `id`=:id,`date_creation`=:date_creation,`date_update`=:date_update,`category`=:category,`name`=:name,`url`=:url,`id_artiste`=:id_artiste,`id_quartier`=:id_quartier,`text`=:text,`weekly`=:weekly WHERE `id`=:id_where"
 			,"one_quartier_by_id" : "UPDATE `quartier` SET `id`=:id,`date_creation`=:date_creation,`date_update`=:date_update,`name`=:name,`path_pics`=:path_pics,`text`=:text,`nb_videos`=:nb_videos,`url`=:url WHERE `id`=:id_where"
 			,"one_artiste_by_id" : "UPDATE `artiste` SET `id`=:id,`date_creation`=:date_creation,`date_update`=:date_update,`name`=:name,`path_pics`=:path_pics,`text`=:text,`url`=:url,`itw`=:itw WHERE `id`=:id_where"
+			,"one_user_by_id" : "UPDATE `user` SET `id`=:id,`date_creation`=:date_creation,`date_update`=:date_update,`ta_login`=:ta_login,`ta_password`=:ta_password,`mail`=:mail,`rights`=:rights,`nb_visits`=:nb_visits WHERE `id`=:id_where"
 			,"user_nb_visits" : "UPDATE `user` SET `nb_visits`= ? WHERE `ta_login`= ?"
 		},
 		"user" : {

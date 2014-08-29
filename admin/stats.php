@@ -19,7 +19,7 @@ if (!$log->is_logued()) {
 	<script src="../components/jquery.js"></script>
 </head>
 <body>
-	<?php include('menu.html'); ?>
+	<?php include('menu.php'); ?>
 
 	<h2>Alors la j'ai rien fait du tout.</h2>
 </body>

@@ -18,7 +18,7 @@ if (!$log->is_logued()) {
 	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
 </head>
 <body>
-	<?php include('menu.html'); ?>
+	<?php include('menu.php'); ?>
 	<div class="container">
 	<h2>Nouveau quartier</h2>
 	<form method="post" action="./index.php"  enctype="multipart/form-data">

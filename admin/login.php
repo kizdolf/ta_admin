@@ -11,7 +11,10 @@ if (isset($_GET['case'])) {
 		case 'leave':
 			$html = "Vous êtes bien déconnecté";
 			break;
-			default:
+		case 'change':
+			$html = 'Veuillez vous reconnecter avec vos nouveaux identifiants.';
+			break;
+		default:
 			$html = "";
 			break;
 	}
@@ -29,6 +32,9 @@ if (isset($_GET['case'])) {
 <div>
 	<h3><?php echo $html; ?></h3>
 </div>
+<?php 
+// echo hash('whirlpool', '123');
+ ?>
 <form action="index.php" method="post">
 	<p>Login : </p>
 	<input	type="text" name="login">
