@@ -110,3 +110,26 @@ body {
     border: 1px solid rgb(165, 19, 19);
     border-radius: 3px !important;
 }
+
+#block_users{
+    width: 50%;
+    float: left;
+    box-shadow: 2px 6px 9px 2px rgb(230, 230, 230);
+}
+
+#block_new_admin{
+    width: 50%;
+    float: right;
+}
+
+#all_posts{
+    width: 80%;
+    float: right;
+}
+
+#sidebar{
+    width: 19%;
+    float: left;
+    padding: 5px;
+    box-shadow: 2px 6px 9px 2px rgb(230, 230, 230);
+}

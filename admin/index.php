@@ -55,6 +55,11 @@ elseif (isset($_POST['new_post'])) {
 	$bdd->new_video($_POST['video_name'], $_POST['video_desc'], $_POST['video_url'], $id_a, $_POST['quartier_id'], $weekly, $category);
 	$message .= "<a href='index.php'>Sauvegarde effectuée. Cliquez ici pour actualiser et voir le post apparaitre.</a>";
 }
+elseif (isset($_POST['new_profil'])) {
+		$password = hash('whirlpool', $_POST['password']);
+		$bdd->new_user(array($_POST["ta_login"], $password, $_POST["mail"], $_POST["rights"]));
+		header('Location: add_profil.php');
+	}
 
 /*
 	HANDLER MESSAGES
@@ -81,10 +86,21 @@ if (isset($_GET['done'])){
 <body>
 	<?php include('menu.php'); ?>
 	<div id="messages" class="jumbotron"><?php echo $message; ?></div>
-	<div><hr>
+	<div id="sidebar">
+		<h3>SideBar.</h3>
+		<p>
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</p>
+	</div>
+	<div id="all_posts"><hr>
 		<?php 
 			foreach ($post as $p) {
-				echo "<div id='post' class='container container-fluid'>";
+				echo "<div id='post' >";
 				if ($p['video']['weekly'] == 1) {
 					echo "<span class='weekly'><img src='img/weekly.jpg'></span>";
 				}

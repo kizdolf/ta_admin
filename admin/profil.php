@@ -9,15 +9,18 @@ $message = "";
 if (!$log->is_logued()) {
 	header('Location: login.php?case=disconnect');
 }else{
+	$cookie = unserialize($_COOKIE['session']);
+	$name = $cookie['user'];
+	$user = $bdd->get_one_user('ta_login', $name);
 if (isset($_GET['id'])) {
 	$profil = $bdd->get_one_user('id', $_GET['id']);
 }elseif (!isset($_POST['up_profil'])) {
-	$cookie = unserialize($_COOKIE['session']);
-	$name = $cookie['user'];
-	$profil = $bdd->get_one_user('ta_login', $name);
+	$profil = $user;
 }elseif(isset($_POST['up_profil'])) {
-	$cookie = unserialize($_COOKIE['session']);
-	if (hash('whirlpool', $_POST['current_password']) == $cookie['hash']) {
+	if ($user['rights'] > 1 && $_POST['id'] != $user['id']) {
+		$message .= "<div class='alert alert-danger'>Faut pas tricher avec le système!!!</div>";
+		$profil = $user;
+	}elseif (hash('whirlpool', $_POST['current_password']) == $cookie['hash']) {
 		$vars = array();
 		$profil = $bdd->get_one_user('id', $_POST['id']);
 		$vars = $_POST;
@@ -36,8 +39,8 @@ if (isset($_GET['id'])) {
 		}
 		$profil['date_update'] = date("Y-m-d H:i:s");
 		$bdd->update_one_user($profil);
-		if(isset($vars['ta_password']) || isset($vars['login']))
-			$message .= "<div class='alert alert-info'>Veuillez vous reconnecter pour valider les changements.<br><a class='btn btn-success btn-lg' href='login.php?case=change'>Se reconnecter</a></div>";
+		if(isset($vars['ta_password']) || isset($vars['ta_login']))
+			$message .= "<div class='alert alert-info'>Veuillez vous reconnecter pour valider les changements.<br><a class='btn btn-success btn-lg' href='login.php?case=change'>Se reconnecter</a>(inutile si vous ne modifiez pas votre profil...)</div>";
 		else
 			$message .= "<div class='alert alert-info'>Changements effectués!</div>";
 	}
@@ -78,7 +81,7 @@ if (isset($_GET['id'])) {
 			<input type="text" class="form-control" name="mail" placeholder="mail">
 			<input type="password" class="form-control" name="new_password" placeholder="password">
 			<input type="password" class="form-control" name="new_password_verif" placeholder="password_verif">
-		<?php  if ($profil['rights'] <= 1) {
+		<?php  if ($user['rights'] <= 1) {
 			?>
 			<select class="form-control" name='rights'>
 			  <option value="0">Full admin</option>

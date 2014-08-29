@@ -359,10 +359,10 @@ class tapdo
 		$prep->execute(array($login));
 		$res = $prep->fetch(PDO::FETCH_ASSOC);
 		$nb = $res['nb_visits'] + 1;
-		
+		$date = date("Y-m-d H:i:s");
 		$q = $this->_querys->update->user_nb_visits;
 		$prep=$this->_con->prepare($q);
-		$prep->execute(array($nb, $login));
+		$prep->execute(array($nb, $date, $login));
 		
 		$this->_con->commit();
 		return $res['id'];
@@ -375,11 +375,30 @@ class tapdo
 		$q = $this->_querys->update->one_user_by_id;
 		$prep=$this->_con->prepare($q);
 		$vars['id_where'] = $vars['id'];
-		echo "<pre>";
-		print_r($vars);
-		echo "</pre>";
 		$prep->execute($vars);
 
+		$this->_con->commit();
+	}
+
+	public function get_all_users()
+	{
+		$this->_con->beginTransaction(); 
+		$q = $this->_querys->get->all_users;
+		$prep=$this->_con->prepare($q);
+		$prep->execute();
+		$ret = array();
+		while ($res = $prep->fetch(PDO::FETCH_ASSOC))
+			$ret[] = $res;
+		$this->_con->commit();
+		return $ret;
+	}
+
+	public function new_user($kwarg)
+	{
+		$this->_con->beginTransaction(); 
+		$q = $this->_querys->new->user;
+		$prep=$this->_con->prepare($q);
+		$prep->execute($kwarg);
 		$this->_con->commit();
 	}
 }
