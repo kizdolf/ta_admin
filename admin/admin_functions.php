@@ -32,17 +32,19 @@ function reArrayFiles(&$file_post) {
 	$files = reArrayFiles($files["pics"]);
 	$i = 1;
 	foreach ($files as $key => $value) {
-		$ext = explode(".", $value["name"]);
-		$ext = strtolower($ext[1]);
-		$files[$key]["name"] = $name_pic."_$i.".$ext;
-		$i++;
-		if(!($url = save_file($files[$key], $ext, $path))) {
-			echo "<h4> An error has occur saving the file '".$files[$key]["name"]."'. Contact admin please </h4>";
+		if ($value["name"] != '') {
+			$ext = explode(".", $value["name"]);
+			$ext = strtolower($ext[1]);
+			$files[$key]["name"] = $name_pic."_$i.".$ext;
+			$i++;
+			if(!($url = save_file($files[$key], $ext, $path))) {
+				echo "<h4> An error has occur saving the file '".$files[$key]["name"]."'. Contact admin please </h4>";
+			}
 		}
 	}
 }
 function html_edit($entry, $id, $type) {
-	echo "<form action='edit.php?type=valid_edit&id=$id&table=$type' method='post'>";
+	echo "<form action='edit.php?type=valid_edit&id=$id&table=$type' method='post' enctype='multipart/form-data'>";
 	foreach ($entry as $col => $val) {
 		if(!strstr($col, "id") && !strstr($col, "date") && !strstr($col, "path")) {
 			echo "<p>$col : </p>";
@@ -62,6 +64,12 @@ function html_edit($entry, $id, $type) {
 					break;
 			}
 		}
+	}
+	if (isset($table) && !strstr($table, 'video')) {
+		echo "<div id='upload' class='jumbotron'>
+				<h3>Photos</h3>
+				<input type='file' multiple='multiple' name='pics[]' id='pics'> <br>
+			</div>";
 	}
 	echo "<br><input type='submit' value='valider'>";
 	echo "</form>";

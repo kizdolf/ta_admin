@@ -3,7 +3,7 @@
 
 <ul class="list-unstyled">
 	<li ng-repeat="art in artistes" class="pull-left">
-		<a href="#/artistes/{{ art.name }}" class="btn btn-success">{{ art.name }}</a>
+		<a href="#/artistes/{{ art.name }}" class="btn btn-success">{{ art.name }}<img src="{{art.imgs[0]}}"></a>
 	</li>
 </ul>
 </div>

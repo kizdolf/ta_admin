@@ -13,6 +13,13 @@ if (!isset($_GET['type']) || !isset($_GET['id'])) {
 $bdd = new tapdo();
 $type = $_GET['type'];
 $id = $_GET['id'];
+$cookie = unserialize($_COOKIE['session']);
+$name = $cookie['user'];
+$user = $bdd->get_one_user('ta_login', $name);
+$rights = $user['rights'];
+if ($rights > 2) {
+	header('Location: index.php?no=rights');
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,12 +33,13 @@ $id = $_GET['id'];
 </head>
 <body>
 	<?php include('menu.php'); ?>
-
+	<div id="wrapper">
 <?php
-
 if ($_GET['type'] == "valid_edit") {
 	$get = "get_one_".$_GET['table'];
 	$entry = $bdd->$get('id', $id);
+	if(isset($entry['path_pics']))
+		pics_handler($_FILES, $entry['path_pics'], $entry['name']);
 	foreach ($_POST as $key => $value) {
 		if (isset($entry[$key])) {
 			$entry[$key] = $value;
@@ -53,7 +61,7 @@ else{
 	html_edit($bdd->$get('id', $id), $id, $type);
 }
  ?>
-
+</div>
 </body>
 </html>
 <?php } ?>

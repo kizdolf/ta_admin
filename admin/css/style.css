@@ -122,9 +122,10 @@ body {
     float: right;
 }
 
-#all_posts{
+#wrapper{
     width: 80%;
     float: right;
+    padding: 15px;
 }
 
 #sidebar{
@@ -132,4 +133,11 @@ body {
     float: left;
     padding: 5px;
     box-shadow: 2px 6px 9px 2px rgb(230, 230, 230);
+}
+
+.get_vid{
+    position: relative;
+    left: 45%;
+    top: 45%;
+    z-index: 999;
 }

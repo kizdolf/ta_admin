@@ -3,7 +3,11 @@
 
 	<ul class="list-unstyled">
 		<li ng-repeat="quartier in quartiers" class="pull-left">
-			<a href="#/quartiers/{{ quartier.name }}" class="btn btn-success">{{ quartier.name }}</a>
+			<div ng-if="quartier.nb_videos > 0">
+				<a href="#/quartiers/{{ quartier.name }}" class="btn btn-success">{{ quartier.name }}
+				<img src="{{quartier.imgs[0]}}">
+				</a>	
+			</div>
 		</li>
 	</ul>
 </div>

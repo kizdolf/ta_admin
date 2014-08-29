@@ -33,6 +33,7 @@ if (!$log->is_logued()) {
 <body>
 	<?php include('menu.php'); ?>
 	<div id="message"><?php if(isset($message)){echo "<h4>$message</h4>";} ?></div>
+	<div id="wrapper">
 	<div class="container" id="block_users">
 	<h2>Admins présents:</h2>
 <?php 
@@ -89,6 +90,7 @@ foreach ($users as $user) {
 	<input type="password" class="form-control" name="current_password" placeholder="password actuel">
 	<button class="btn btn-lg btn-success " type="submit" name="new_profil">Créer le profil</button>
 </form>
+</div>
 </div>
 </body>
 </html>

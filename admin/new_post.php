@@ -30,7 +30,9 @@ foreach ($quartiers as $q) {
 </head>
 <body>
 	<?php include('menu.php'); ?>
-	<div class="container">
+	<div id="wrapper">
+
+	<div>
 	<h2>Nouveau post</h2>
 		<div>
 			<h3>Choisir un quartier</h3>
@@ -40,16 +42,16 @@ foreach ($quartiers as $q) {
 			</div>
 		</div>
 	<form method="post" action="./index.php" enctype="multipart/form-data">
-		<input type="hidden" id="quartier_id" name="quartier_id">
+		<input type="hidden" id="quartier_id" name="quartier_id" class="inputc">
 		<div id="float_form" class="input-group input-group-lg">
 			<div class='page-header'>
 				<h2>Artiste</h2>
 			</div>
-			<input type="text" class="form-control" name="artiste_name" placeholder="nom">
+			<input type="text" class="form-control inputc" name="artiste_name" placeholder="nom">
 			<hr>
 			<div id="float_form" class="input-group input-group-lg">
 				<span class="input-group-addon">@</span>
-				<input type="text" class="form-control" name="artiste_url" placeholder="url de l'artiste">
+				<input type="text" class="inputc form-control" name="artiste_url" placeholder="url de l'artiste">
 			</div>
 			<p>Texte : </p>
 			<textarea id="ck_a" name="artiste_desc" rows="5" cols="30" class="form-control"></textarea>
@@ -57,7 +59,7 @@ foreach ($quartiers as $q) {
 
 			<div id="float_form" class="input-group input-group-lg">
 				<span class="input-group-addon">@</span>
-				<input type="text" class="form-control" name="itw" placeholder='Itw sounclound'>
+				<input type="text" class="inputc form-control" name="itw" placeholder='Itw sounclound'>
 			</div>
 			<div id="upload" class="jumbotron">
 				<h3>Photos</h3>
@@ -68,7 +70,7 @@ foreach ($quartiers as $q) {
 			<div class="page-header">
 				<h2>video</h2>
 			</div>
-			<input type="text" class="form-control" name="video_name" placeholder="nom">
+			<input type="text" class="inputc form-control" name="video_name" placeholder="nom">
 			<div id="float_form" class="input-group input-group-lg">
 				<span class="input-group-addon">@</span>
 				<input type="text" class="form-control" name="video_url">
@@ -91,7 +93,7 @@ foreach ($quartiers as $q) {
 	<script type="text/javascript">
 
 	$check = function(){
-		$('input').each(function(){
+		$('.inputc').each(function(){
 			if($(this).val() == ''){
 				$(this).addClass('missing');
 				$('.valid').hide();
@@ -116,13 +118,14 @@ foreach ($quartiers as $q) {
 
 	
 
-	$('input').change(function(){
+	$('input').keypress(function(){
 		$('.valid').show();
 		$('.alert').hide();
 		$check();
 	});
 
 	</script>
+	</div>
 </body>
 </html>
 <?php } ?>

@@ -9,10 +9,7 @@
 	<h4>{{quartier.name}}</h4></a>
 </div>
 
-<div>
-	<ul>
-		<li ng-repeat="img in test">
-			<img src="{{img}}">
-		</li>
-	</ul>
+<div ng-click="next_pic()">
+<img src="{{ pic }}">
+</div>
 </div>

@@ -65,8 +65,8 @@ if (isset($_GET['id'])) {
 </head>
 <body>
 	<?php include('menu.php'); ?>
-<div id="message"><?php if(isset($message)){echo "<h4>$message</h4>";} ?></div>
-<div class="container">
+<div id="wrapper">
+	<div id="message"><?php if(isset($message)){echo "<h4>$message</h4>";} ?></div>
 	<div class="jumbotron">
 		<h3>Apercu du profil de: "<?php echo $profil['ta_login']; ?>"</h3>
 		<p>Compte créer le: <?php echo $profil['date_creation']; ?></p>
@@ -97,9 +97,7 @@ if (isset($_GET['id'])) {
 		<button class="btn btn-lg btn-success " type="submit" name="up_profil">Valider les modifications</button>
 	</form>	
 	</div>
-</div>
 <hr>
-<div class="container">
 	<?php  if ($profil['rights'] <= 1) {
 			?>
 			<form method="post" action="./profil.php">

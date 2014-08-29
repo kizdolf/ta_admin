@@ -19,7 +19,7 @@ if (!$log->is_logued()) {
 </head>
 <body>
 	<?php include('menu.php'); ?>
-	<div class="container">
+	<div id="wrapper">
 	<h2>Nouveau quartier</h2>
 	<form method="post" action="./index.php"  enctype="multipart/form-data">
 		<div id="float_form" class="input-group input-group-lg">

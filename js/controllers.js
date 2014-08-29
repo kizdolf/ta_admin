@@ -30,10 +30,19 @@ angular.module('myApp.controllers', [])
 }])
 
 
-.controller('artistesCtrl', ['getData', '$scope', '$routeParams', '$http', '$sce', function(getData, $scope, $routeParams, $http, $sce){
+.controller('artistesCtrl', ['pics', 'getData', '$scope', '$routeParams', '$http', '$sce', function(pics, getData, $scope, $routeParams, $http, $sce){
 
 	getData.artistes('').then(function(data){
 		$scope.artistes = data.data;
+	}).then(function(){
+
+	$scope.artistes.forEach(function(i){
+		pics.list_pics(i.path_pics).then(function(data){
+			$scope.truc = data.data;
+		}).then(function(){
+			i.imgs = $scope.truc;
+		});
+	})
 	});
 }])
 
@@ -47,14 +56,27 @@ angular.module('myApp.controllers', [])
 	});
 }])
 
-.controller('quartiersCtrl', ['getData', '$scope', '$routeParams', '$http', '$sce', function(getData, $scope, $routeParams, $http, $sce){
+.controller('quartiersCtrl', ['pics', 'getData', '$scope', '$routeParams', '$http', '$sce', function(pics, getData, $scope, $routeParams, $http, $sce){
 
 	getData.quartiers('').then(function(data){
+
 		$scope.quartiers = data.data;
+		
+	}).then(function(){
+
+	$scope.quartiers.forEach(function(i){
+		pics.list_pics(i.path_pics).then(function(data){
+			$scope.truc = data.data;
+		}).then(function(){
+			i.imgs = $scope.truc;
+		});
+	})
 	});
 }])
 
 .controller('picsCtrl', ['pics', 'getData', '$scope', '$routeParams', '$http', '$sce', function(pics, getData, $scope, $routeParams, $http, $sce){
+
+	$scope.index = 0;
 
 	getData.artistes('').then(function(data){
 		$scope.artistes = data.data;
@@ -65,8 +87,20 @@ angular.module('myApp.controllers', [])
 	});
 
 	$scope.name_click = function(path){
+		
 		pics.list_pics(path).then(function(data){
-			$scope.test = data.data;
+			$scope.pics = data.data;
+			$scope.pic = data.data[$scope.index];
+			$scope.index = $scope.index + 1;
+			if(!angular.isDefined(data.data[$scope.index]))
+				$scope.index = 0;
 		});
 	};
+
+	$scope.next_pic = function(){
+		$scope.pic = $scope.pics[$scope.index];
+		$scope.index = $scope.index + 1;
+		if(!angular.isDefined($scope.pics[$scope.index]))
+				$scope.index = 0;
+	}
 }]);

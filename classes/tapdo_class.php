@@ -401,6 +401,44 @@ class tapdo
 		$prep->execute($kwarg);
 		$this->_con->commit();
 	}
+
+	public function get_all_names_id()
+	{
+		$this->_con->beginTransaction(); 
+		$qa = $this->_querys->get->all_artistes_name;
+		$qq = $this->_querys->get->all_quartiers_name;
+		$qv = $this->_querys->get->all_videos_name;
+		$prepa=$this->_con->prepare($qa);
+		$prepa->execute();
+		$res['artistes'] = $this->fetch_res($prepa);
+		$prepq=$this->_con->prepare($qq);
+		$prepq->execute();
+		$res['quartiers'] = $this->fetch_res($prepq);
+		$prepv=$this->_con->prepare($qv);
+		$prepv->execute();
+		$res['videos'] = $this->fetch_res($prepv);
+		$this->_con->commit();
+		return $res;
+	}
+
+	public function get_rights_user($id)
+	{
+		$this->_con->beginTransaction(); 
+		$q= $this->_querys->get->rights_user_id;
+		$prep=$this->_con->prepare($q);
+		$prep->execute($id);
+		$res = $this->fetch_res($prep);
+		$this->_con->commit();
+		return $res[0]['rights'];
+	}
+
+	private function fetch_res($prep)
+	{
+		$ret = array();
+		while ($res = $prep->fetch(PDO::FETCH_ASSOC))
+			$ret[] = $res;
+		return $ret;
+	}
 }
 
 ?>
