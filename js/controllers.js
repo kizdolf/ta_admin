@@ -2,8 +2,8 @@
 
 angular.module('myApp.controllers', [])
 
-.controller('headCtrl', ['filterFilter', '$scope', '$http', '$sce', 'getData', 'tools'
-	,function(filterFilter, $scope, $http, $sce, getData, tools){
+.controller('headCtrl', ['pics', 'filterFilter', '$scope', '$http', '$sce', 'getData', 'tools'
+	,function(pics, filterFilter, $scope, $http, $sce, getData, tools){
 
 	$scope.title = "Welcome at Toulouse Acoustics";
 
@@ -14,6 +14,19 @@ angular.module('myApp.controllers', [])
 		$scope.weekly.video.text = $sce.trustAsHtml($scope.weekly.video.text);
 		$scope.weekly.artiste.text = $sce.trustAsHtml($scope.weekly.artiste.text);
 		$scope.weekly.quartier.text = $sce.trustAsHtml($scope.weekly.quartier.text);
+	}).then(function(){
+
+	pics.list_pics($scope.weekly.artiste.path_pics).then(function(data){
+		$scope.truc = data.data;
+		console.log(data.data);
+	}).then(function(){
+		if ($scope.truc == "T") {
+			$scope.weekly.artiste.imgs = ["img/badges/weekly.jpg"];
+		}
+		else{
+			$scope.weekly.artiste.imgs = $scope.truc;
+		}
+	});
 	});
 }])
 
@@ -69,7 +82,12 @@ angular.module('myApp.controllers', [])
 		pics.list_pics(i.path_pics).then(function(data){
 			$scope.truc = data.data;
 		}).then(function(){
-			i.imgs = $scope.truc;
+			if ($scope.truc == "T") {
+				i.imgs = ["img/badges/weekly.jpg"];
+			}
+			else{
+				i.imgs = $scope.truc;
+			}
 		});
 	})
 	});

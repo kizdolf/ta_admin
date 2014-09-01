@@ -4,10 +4,10 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Toulouse Acoustics </title>
-  <link rel="stylesheet" type="text/css" href="css/style.css">
-  <link rel="stylesheet" type="text/css" href="css/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap/css/bootstrap.min.css">
 	<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
-  <base href="/public/adminta/">
+	<base href="/public/adminta/">
 </head>
 <body>
 <div class="container container-fluid">
@@ -28,7 +28,7 @@
 			</button>
 		</div>
 		<div class="collapse navbar-collapse" id="list_items_menu">
-			<ul class="nav navbar-nav">
+			<ul class="nav navbar-nav menu_ul">
 				<li>
 					<a href="#/home">accueil</a>
 				</li>
@@ -42,7 +42,7 @@
 					<a href="#/portfolio">portfolio</a>
 				</li>
 				<li>
-					<a href="#/a propos">a propos</a>
+					<a href="#/about">a propos</a>
 				</li>
 				<li>
 					<a href="#/contact">contact</a>

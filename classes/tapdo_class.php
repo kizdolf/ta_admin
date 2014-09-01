@@ -168,12 +168,14 @@ class tapdo
 			,"category" => $video['category']);
 		$post['artiste'] = array(
 			"id" => $artiste['id']
+			,"path_pics" => $artiste['path_pics']
 			,"name" => $artiste['name']
 			,"text" =>$artiste['text']
 			,"url" => $artiste['url']
 			,"date" => $artiste['date_creation']);
 		$post['quartier'] = array(
 			"id" => $quartier['id']
+			,"path_pics" => $quartier['path_pics']
 			,"name" => $quartier['name']
 			,"text" =>$quartier['text']
 			,"url" => $quartier['url']
