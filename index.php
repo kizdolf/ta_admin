@@ -6,63 +6,56 @@
 	<title>Toulouse Acoustics </title>
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" type="text/css" href="css/bootstrap/css/bootstrap.min.css">
+	<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
   <base href="/public/adminta/">
 </head>
 <body>
-  <div id="header" class="page-header">
-    <h1>Welcome at Toulouse Acoustics</h1>
+<div class="container container-fluid">
+  <div id="header">
+  	<a href="#/home" id="img_header">
+  		<img src="img/headers/header.jpg" id="img_header">
+  	</a>
   </div>
+  <!-- Nouveau Menu responsive: -->
+<nav ng-controller="headCtrl" class="navbar navbar-default" role="navigation" id="resp_menu">
+	<div class="container container-fluid">
+		<div>
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#list_items_menu">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		</div>
+		<div class="collapse navbar-collapse" id="list_items_menu">
+			<ul class="nav navbar-nav">
+				<li>
+					<a href="#/home">accueil</a>
+				</li>
+				<li>
+					<a href="#/artistes">artistes</a>
+				</li>
+				<li>
+					<a href="#/quartiers">quartiers</a>
+				</li>
+				<li>
+					<a href="#/portfolio">portfolio</a>
+				</li>
+				<li>
+					<a href="#/a propos">a propos</a>
+				</li>
+				<li>
+					<a href="#/contact">contact</a>
+				</li>
+				<li>
+					<a href="#/partners">partenaires</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
 
-<!-- MAIN MENU -->
-  <div ng-controller="headCtrl" id="divMenu">
-    <ul class="list-unstyled container" id="menuList">
-      <li class="pull-left" id="menuLi">
-        <a href="#/home" class="title">ACCUEIL</a>
-      </li>
-      <li class="pull-left" id="menuLi">
-        <a href="#/artistes" class="title" id="artistesMenu">ARTISTES</a>
-        <ul class="list-unstyled subMenu" id="artistesListe">
-          <li ng-repeat="a in artistes" class="pull-left subItem">
-          <a href="#/artistes/{{ a.name }}" class="btn btn-info">{{ a.name }}</a>  
-          </li>
-        </ul>
-      </li>
-      <li class="pull-left" id="menuLi">
-      <a href="#/quartiers" class="title" id="quartiersMenu">QUARTIERS</a>
-        <ul class="list-unstyled subMenu" id="quartiersListe">
-          <li ng-repeat="q in quartiers" class="pull-left subItem">
-            <a href="#/quartiers/{{q.name}}" class="btn btn-info">{{ q.name }}</a>
-          </li>
-        </ul>
-      </li>
-      <li class="pull-left" id="menuLi">
-        <a href="#/portfolio" class="title"> PORTFOLIO </a>
-      </li>
-      <li class="pull-left" id="menuLi">
-        <a href="#/about" class="title"> A PROPOS </a>
-      </li>
-      <li class="pull-left" id="menuLi">
-        <a href="#/contact" class="title"> CONTACT </a>
-      </li>
-      <li class="pull-left" id="menuLi">
-        <a href="#/partners" class="title"> PARTENAIRES </a>
-      </li>
-      <li class="pull-left" id="menuLi">
-      <form>
-        <input type="text" placeholder="Recherche" ng-model="search" ng-change="getRes()" >
-      </form>
-      </li>
-    </ul>
-    <div id="resultSearch">
-      <ul>
-        <li ng-repeat="res in resSearch" >
-       <a href="#/{{res.id}}/{{ res.name }}"> {{ res.name }} </a>
-        </li>
-      </ul>
-    </div>
-  </div>
-
-<div ng-view></div>
+<div ng-view style="height:100%;"></div>
 
 
 <!-- <div id="container-fluid" >
@@ -82,6 +75,6 @@
   <script src="css/bootstrap/js/bootstrap.min.js"></script>
   <script src="js/services.js"></script>
   <script src="//connect.soundcloud.com/sdk.js"></script>
-  
+  </div>
 </body>
 </html>

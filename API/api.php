@@ -74,7 +74,7 @@ Helpers
 		$imgpath = explode("../", $path);
 		$imgpath = $imgpath[1];
 		if(!is_dir($path))
-			die('Wrong patern.');
+			die("T");
 		$handle = opendir($path);
 		$files = array();
 		// $path = explode("../", $path);

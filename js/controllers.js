@@ -6,18 +6,14 @@ angular.module('myApp.controllers', [])
 	,function(filterFilter, $scope, $http, $sce, getData, tools){
 
 	$scope.title = "Welcome at Toulouse Acoustics";
-	
-	getData.quartiers('name').then(function(data){
-		$scope.quartiers = data.data;
-	});
 
-	getData.artistes('name').then(function(data){
-		$scope.artistes = data.data;
-	});
 
 	getData.weekly().then(function(data){
 		$scope.weekly = data.data;
 		$scope.weekly.video.frame = tools.iframe($scope.weekly.video.url);
+		$scope.weekly.video.text = $sce.trustAsHtml($scope.weekly.video.text);
+		$scope.weekly.artiste.text = $sce.trustAsHtml($scope.weekly.artiste.text);
+		$scope.weekly.quartier.text = $sce.trustAsHtml($scope.weekly.quartier.text);
 	});
 }])
 
@@ -40,9 +36,14 @@ angular.module('myApp.controllers', [])
 		pics.list_pics(i.path_pics).then(function(data){
 			$scope.truc = data.data;
 		}).then(function(){
-			i.imgs = $scope.truc;
+			if ($scope.truc == "T") {
+				i.imgs = ["img/badges/weekly.jpg"];
+			}
+			else{
+				i.imgs = $scope.truc;
+			}
 		});
-	})
+	});
 	});
 }])
 
