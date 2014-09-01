@@ -65,7 +65,7 @@ function html_edit($entry, $id, $type) {
 			}
 		}
 	}
-	if (isset($table) && !strstr($table, 'video')) {
+	if (isset($type) && !strstr($type, 'video')) {
 		echo "<div id='upload' class='jumbotron'>
 				<h3>Photos</h3>
 				<input type='file' multiple='multiple' name='pics[]' id='pics'> <br>

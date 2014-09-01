@@ -38,8 +38,11 @@ if ($rights > 2) {
 if ($_GET['type'] == "valid_edit") {
 	$get = "get_one_".$_GET['table'];
 	$entry = $bdd->$get('id', $id);
-	if(isset($entry['path_pics']))
+	if(isset($entry['path_pics'])){
+		if (!is_dir($entry['path_pics']))
+			mkdir($entry['path_pics']);
 		pics_handler($_FILES, $entry['path_pics'], $entry['name']);
+	}
 	foreach ($_POST as $key => $value) {
 		if (isset($entry[$key])) {
 			$entry[$key] = $value;
