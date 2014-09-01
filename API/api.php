@@ -23,8 +23,8 @@ INIT
 	spl_autoload_register(function ($class) {
 		include __DIR__.'/../classes/' . $class . '_class.php';
 	});
-	$bdd = new tapdo();
 	if (isset($_GET['get'])) {
+		$bdd = new tapdo();
 		$get = $_GET['get'];
 	}
 	else{
