@@ -129,16 +129,32 @@ angular.module('myApp.controllers', [])
 	});
 }])
 
-.controller('contactCtrl', ['getData', '$scope', '$sce', function(getData, $scope, $sce){
+.controller('contactCtrl', ['$http', 'getData', '$scope', '$sce', function($http, getData, $scope, $sce){
 	getData.contact().then(function(data){
 		$scope.text = $sce.trustAsHtml(data.data.text);
 	});
 
+	Recaptcha.create("6LejkfkSAAAAAFzdmV65iEt7omLdnJXZoMpMVw3e",
+		"captcha",
+		{
+		 	theme: "red",
+		 	callback: Recaptcha.focus_response_field
+		}
+	// http://www.google.com/recaptcha/api/verify
+  );
+
 	$scope.send_msg = function(msg){
-		console.log(msg);
+		// console.log(msg);
 		//Controle data : email valide, sujet non vide
 		//controle captcha
 		//appel ajax => envoi mail => message success
+		var rep = Recaptcha.get_response();
+		var chal = Recaptcha.get_challenge();
+		$http.get('API/api.php?get=captcha&rep=' + rep + '&chal=' + chal).then(function(data){
+			if(data.data == true){
+				console.log("ready to send mail.");
+			}
+		})
 	};
 }])
 ;

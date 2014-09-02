@@ -13,3 +13,10 @@ $('#send_msg').click(function(){
 	$text = $("textarea[name$='text']").val();
 	alert("Mail = " + $mail + "subject = " + $subject + "text = " + $text);
 });
+
+$(document).on('click', "#send_msg", function(){
+	$c  = $("recaptcha_resposonse_field");
+	console.log("test");
+	console.log($c);
+
+});

@@ -85,6 +85,28 @@ Helpers
 		}
 		print_r(json_encode($files));
 	}
+
+	function captcha_verif($rep, $chal)
+	{
+		$priv = "6LejkfkSAAAAADadlGUDzGJp4kFnIY3GTLjQHcrx";
+		$ip = $_SERVER['REMOTE_ADDR'];
+		$url = "http://www.google.com/recaptcha/api/verify";
+		$data = array("privatekey" => $priv, "remoteip" => $ip, "challenge" => $chal, "response" => $rep);
+		$options = array(
+			'http' => array(
+			'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+			'method'  => 'POST',
+			'content' => http_build_query($data),
+			)
+		);
+		$context  = stream_context_create($options);
+		$result = file_get_contents($url, false, $context);
+		if (strstr($result, "true")) {
+			echo "true";
+		}else{
+			echo "false";
+		}
+	}
 /*
 Inputs.
 */
@@ -127,6 +149,9 @@ Inputs.
 			break;
 		case 'contact':
 			print_r(json_encode($bdd->get_contact()));
+			break;
+		case 'captcha':
+			captcha_verif($_GET['rep'], $_GET['chal']);
 			break;
 		default:
 			echo "Wrong request";
