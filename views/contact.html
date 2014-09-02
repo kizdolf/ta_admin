@@ -10,12 +10,10 @@
 		<span class="input-group-addon">Sujet</span>
 		<input ng-model="msg.subject" type="text" name="subject" class="form-control" placeholder="sujet du message">
 	</div><hr>
-		<textarea ng-model="msg.txt" name="text"  rows="15" cols="40" class="form-control">
-			Veuillez laisser un message après le Bip.
-		</textarea>
-		<p>Ici un captcha</p>
+		<textarea ng-model="msg.txt" name="text"  rows="15" cols="40" class="form-control"></textarea>
+		<div id="message">{{message}}</div>
 		<div id="captcha" ng-model="msg.captcha"></div>
-		<button class="btn btn-success" ng-click="send_msg(msg)">Envoyer nous votre message :)</button>
+		<button class="btn btn-success btn_send" ng-click="send_msg(msg)">{{ txt_btn }}</button>
 	</div>
 </div>
 
