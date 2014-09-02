@@ -131,8 +131,14 @@ angular.module('myApp.controllers', [])
 
 .controller('contactCtrl', ['getData', '$scope', '$sce', function(getData, $scope, $sce){
 	getData.contact().then(function(data){
-		console.log(data.data);
 		$scope.text = $sce.trustAsHtml(data.data.text);
 	});
+
+	$scope.send_msg = function(msg){
+		console.log(msg);
+		//Controle data : email valide, sujet non vide
+		//controle captcha
+		//appel ajax => envoi mail => message success
+	};
 }])
 ;
