@@ -21,7 +21,7 @@ if (!$log->is_logued()) {
 <body>
 	<?php include('menu.php'); ?>
 
-	<h2>Alors la j'ai rien fait du tout.</h2>
+	<iframe src="../components/piwik/piwik/index.php" id="stats_frame"></iframe>
 </body>
 </html>
 <?php } ?>

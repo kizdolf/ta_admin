@@ -20,3 +20,16 @@ $(document).on('click', "#send_msg", function(){
 	console.log($c);
 
 });
+
+$('.sous_menu').hide();
+
+$('.menu_header').on('mouseenter', function(){
+	$('.sous_menu').show();
+	setTimeout(function(){
+		$('.sous_menu').hide();
+	}, 7000);
+});
+
+$('.sous_menu li a').click(function(){
+	$('.sous_menu').hide();
+});

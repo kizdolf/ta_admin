@@ -48,7 +48,15 @@
 					<a href="#/home">accueil</a>
 				</li>
 				<li>
-					<a href="#/artistes">artistes</a>
+					<a class='menu_header'>artistes</a>
+					<ul class="sous_menu">
+						<li>
+							<a href="#/artistes/locaux">Locaux</a>
+						</li>
+						<li>
+							<a href="#/artistes/visiteurs">visiteurs</a>
+						</li>
+					</ul>
 				</li>
 				<li>
 					<a href="#/quartiers">quartiers</a>
