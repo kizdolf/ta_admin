@@ -39,6 +39,8 @@ if (!$log->is_logued()) {
 		<div id="upload" class="jumbotron">
 			<h3>Photos</h3>
 			<input type="file" multiple="multiple" name="pics[]" id="pics"> <br>
+			<h3>Vignette Quartier : 220px / 220px</h3>
+			<input type="file" name="vignette" id="vignette"> <br>
 		</div>
 		<div id="sub_form">
 			<button class="btn btn-lg btn-success valid" type="submit" name="new_quartier">Add it</button>

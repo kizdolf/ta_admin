@@ -35,6 +35,10 @@
 			,"quartier_id" : "SELECT * FROM `quartier` WHERE `id` = :id_quartier"
 			,"nb_visits_user_by_name" : "SELECT `nb_visits`, `id` FROM `user` WHERE `ta_login` = ?"
 			,"rights_user_id" : "SELECT `rights` FROM `user` WHERE `id`=? "
+			,"about" : "SELECT `text` FROM `text` WHERE `name` = 'about'"
+			,"short_about" : "SELECT `text` FROM `text` WHERE `name` = 'short_about'"
+			,"team" : "SELECT `text` FROM `text` WHERE `name` = 'team'"
+			,"contact" : "SELECT `text` FROM `text` WHERE `name` = 'contact'"
 		},
 		"update":{
 			"quartier_nb" : "UPDATE `quartier` SET `nb_videos`= :new_nb WHERE `id` = :id_quartier"
@@ -44,6 +48,10 @@
 			,"one_artiste_by_id" : "UPDATE `artiste` SET `id`=:id,`date_creation`=:date_creation,`date_update`=:date_update, `name`=:name,`path_pics`=:path_pics,`text`=:text,`url`=:url,`itw`=:itw WHERE `id`=:id_where"
 			,"one_user_by_id" : "UPDATE `user` SET `id`=:id,`date_creation`=:date_creation,`date_update`=:date_update, `date_last_visit`=:date_last_visit, `ta_login`=:ta_login,`ta_password`=:ta_password,`mail`=:mail,`rights`=:rights,`nb_visits`=:nb_visits WHERE `id`=:id_where"
 			,"user_nb_visits" : "UPDATE `user` SET `nb_visits`= ?, `date_last_visit`= ? WHERE `ta_login`= ?"
+			,"about" : "UPDATE `text` SET `text` = ?, `name_admin`= ? WHERE `name` = 'about'"
+			,"short_about" : "UPDATE `text` SET `text` = ?, `name_admin`= ? WHERE `name` = 'short_about'"
+			,"team" : "UPDATE `text` SET `text` = ?, `name_admin`= ? WHERE `name` = 'team'"
+			,"contact" : "UPDATE `text` SET `text` = ?, `name_admin`= ? WHERE `name` = 'contact'"
 		},
 		"user" : {
 			"user_exist" : "SELECT `id` FROM `user` WHERE `ta_login`= :name AND `ta_password` = :hash"

@@ -27,6 +27,22 @@
 				return $http.get('API/api.php?get=related&from=' + from + "&type_id=" + type_id + "&id=" + id);
 			};
 
+			this.about = function(){
+				return $http.get('API/api.php?get=about');
+			};
+
+			this.short_about = function(){
+				return $http.get('API/api.php?get=short_about');
+			};
+
+			this.team = function(){
+				return $http.get('API/api.php?get=team');
+			};
+
+			this.contact = function(){
+				return $http.get('API/api.php?get=contact');
+			};
+
 		}])
 
 		.service('tools',['$http', '$sce', function($http, $sce){

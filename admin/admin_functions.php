@@ -29,6 +29,7 @@ function reArrayFiles(&$file_post) {
 }
 
  function pics_handler($files, $path, $name_pic){
+	$vign = $files;
 	$files = reArrayFiles($files["pics"]);
 	$i = 1;
 	foreach ($files as $key => $value) {
@@ -41,6 +42,18 @@ function reArrayFiles(&$file_post) {
 				echo "<h4> An error has occur saving the file '".$files[$key]["name"]."'. Contact admin please </h4>";
 			}
 		}
+	}
+	if (isset($vign['vignette'])) {
+		$pic = $vign['vignette'];
+		if (strstr($path, 'quartier')) {
+			$path = "../img/uniques/quartier";
+		}else{
+			$path = "../img/uniques/artiste";
+		}
+		$ext = explode(".", $pic["name"]);
+		$ext = strtolower($ext[1]);
+		$pic['name'] = $name_pic.".".$ext;
+		save_file($pic, $ext, $path);
 	}
 }
 function html_edit($entry, $id, $type) {
@@ -69,6 +82,8 @@ function html_edit($entry, $id, $type) {
 		echo "<div id='upload' class='jumbotron'>
 				<h3>Photos</h3>
 				<input type='file' multiple='multiple' name='pics[]' id='pics'> <br>
+				<h3>Vignette Quartier : 220px / 220px</h3>
+				<input type='file' name='vignette' id='vignette'> <br>
 			</div>";
 	}
 	echo "<br><input type='submit' value='valider'>";

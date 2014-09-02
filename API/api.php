@@ -116,6 +116,18 @@ Inputs.
 			else
 				get_pics($_GET['path']);
 			break;
+		case 'about':
+			print_r(json_encode($bdd->get_about()));
+			break;
+		case 'team':
+			print_r(json_encode($bdd->get_team()));
+			break;
+		case 'short_about':
+			print_r(json_encode($bdd->get_short_about()));
+			break;
+		case 'contact':
+			print_r(json_encode($bdd->get_contact()));
+			break;
 		default:
 			echo "Wrong request";
 			break;

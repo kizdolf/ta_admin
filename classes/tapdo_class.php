@@ -434,6 +434,73 @@ class tapdo
 		return $res[0]['rights'];
 	}
 
+	public function update_one_text($post, $name)
+	{
+		$this->_con->beginTransaction(); 
+		if (isset($post['about'])) {
+			$q = $this->_querys->update->about;
+			$var = array($post['about'], $name);
+		}elseif (isset($post['team'])) {
+			$q = $this->_querys->update->team;
+			$var = array($post['team'], $name);
+		}elseif (isset($post['contact'])) {
+			$q = $this->_querys->update->contact;
+			$var = array($post['contact'], $name);
+		}elseif (isset($post['short_about'])) {
+			$q = $this->_querys->update->short_about;
+			$var = array($post['short_about'], $name);
+		}else{
+			return false;
+		}
+		$prep = $this->_con->prepare($q);
+		$prep->execute($var);
+		$this->_con->commit();
+	}
+
+	public function get_about()
+	{
+		$this->_con->beginTransaction(); 
+		$q = $this->_querys->get->about;
+		$prep = $this->_con->prepare($q);
+		$prep->execute();
+		$res = $this->fetch_res($prep);
+		$this->_con->commit();
+		return $res[0];
+	}
+
+	public function get_team()
+	{
+		$this->_con->beginTransaction(); 
+		$q = $this->_querys->get->team;
+		$prep = $this->_con->prepare($q);
+		$prep->execute();
+		$res = $this->fetch_res($prep);
+		$this->_con->commit();
+		return $res[0];
+	}
+
+	public function get_short_about()
+	{
+		$this->_con->beginTransaction(); 
+		$q = $this->_querys->get->short_about;
+		$prep = $this->_con->prepare($q);
+		$prep->execute();
+		$res = $this->fetch_res($prep);
+		$this->_con->commit();
+		return $res[0];
+	}
+
+	public function get_contact()
+	{
+		$this->_con->beginTransaction(); 
+		$q = $this->_querys->get->contact;
+		$prep = $this->_con->prepare($q);
+		$prep->execute();
+		$res = $this->fetch_res($prep);
+		$this->_con->commit();
+		return $res[0];
+	}
+
 	private function fetch_res($prep)
 	{
 		$ret = array();

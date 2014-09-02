@@ -8,6 +8,18 @@ if (!$log->is_logued()) {
 	header('Location: login.php?case=disconnect');
 }else{
 $bdd = new tapdo();
+$cookie = unserialize($_COOKIE['session']);
+$name = $cookie['user'];
+$user = $bdd->get_one_user('ta_login', $name);
+$rights = $user['rights'];
+$message = "";
+if (isset($_POST['submit_text']) && $rights <= 2) {
+	$bdd->update_one_text($_POST, $user['ta_login']);
+	$message .= "<div class='alert alert-success'>Texte bien modifié! </div>";
+}
+if ($rights > 2) {
+	$message .= "<div class='alert alert-danger'>Vous n'avez pas les droits pour modifier ces textes.</div>";
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,7 +34,9 @@ $bdd = new tapdo();
 <body>
 	<?php include('menu.php'); ?>
 	<div id="wrapper">
+	<div id="message"><?php if(isset($message)){echo "<h4>$message</h4>";} ?></div>
 	<h1>Modifications des textes:</h1>
+	<?php if($rights <= 2){ ?>
 	<div class="panel-group" id="accordion">
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -37,7 +51,7 @@ $bdd = new tapdo();
 					<form method="post" action="edit_texts.php">
 						<textarea id="ck_a" name="about" rows="5" cols="30" class="form-control"></textarea>
 							<script>CKEDITOR.replace( 'ck_a' );</script>
-							<input type="submit" class="btn btn-success" value="Valider">
+							<input type="submit" name="submit_text" class="btn btn-success" value="Valider">
 					</form>
 				</div>
 			</div>
@@ -55,7 +69,7 @@ $bdd = new tapdo();
 					<form method="post" action="edit_texts.php">
 						<textarea id="ck_b" name="team" rows="5" cols="30" class="form-control"></textarea>
 							<script>CKEDITOR.replace( 'ck_b' );</script>
-							<input type="submit" class="btn btn-success" value="Valider">
+							<input type="submit" name="submit_text" class="btn btn-success" value="Valider">
 					</form>
 				</div>
 			</div>
@@ -73,7 +87,7 @@ $bdd = new tapdo();
 					<form method="post" action="edit_texts.php">
 						<textarea id="ck_c" name="contact" rows="5" cols="30" class="form-control"></textarea>
 							<script>CKEDITOR.replace( 'ck_c' );</script>
-							<input type="submit" class="btn btn-success" value="Valider">
+							<input type="submit" name="submit_text" class="btn btn-success" value="Valider">
 					</form>
 				</div>
 			</div>
@@ -91,7 +105,7 @@ $bdd = new tapdo();
 					<form method="post" action="edit_texts.php">
 						<textarea id="ck_d" name="short_about" rows="5" cols="30" class="form-control"></textarea>
 							<script>CKEDITOR.replace( 'ck_d' );</script>
-							<input type="submit" class="btn btn-success" value="Valider">
+							<input type="submit" name="submit_text" class="btn btn-success" value="Valider">
 					</form>
 				</div>
 			</div>
@@ -100,4 +114,4 @@ $bdd = new tapdo();
 </div>
 </body>
 </html>
-<?php } ?>
+<?php } } ?>

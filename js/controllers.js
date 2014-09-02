@@ -18,7 +18,6 @@ angular.module('myApp.controllers', [])
 
 	pics.list_pics($scope.weekly.artiste.path_pics).then(function(data){
 		$scope.truc = data.data;
-		console.log(data.data);
 	}).then(function(){
 		if ($scope.truc == "T") {
 			$scope.weekly.artiste.imgs = ["img/badges/weekly.jpg"];
@@ -122,4 +121,18 @@ angular.module('myApp.controllers', [])
 		if(!angular.isDefined($scope.pics[$scope.index]))
 				$scope.index = 0;
 	}
-}]);
+}])
+
+.controller('aboutCtrl', ['getData', '$scope', '$sce', function(getData, $scope, $sce){
+	getData.about().then(function(data){
+		$scope.text = $sce.trustAsHtml(data.data.text);
+	});
+}])
+
+.controller('contactCtrl', ['getData', '$scope', '$sce', function(getData, $scope, $sce){
+	getData.contact().then(function(data){
+		console.log(data.data);
+		$scope.text = $sce.trustAsHtml(data.data.text);
+	});
+}])
+;
