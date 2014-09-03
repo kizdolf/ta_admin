@@ -41,9 +41,13 @@ body{
 }
 
 #resp_menu div ul li:hover{
-	background: #9FBAB3;
+	/*background: #9FBAB3;*/
 	/*padding-right: 0px;
 	padding-left: 10px;*/
+}
+
+#resp_menu div ul li:hover >  a{
+	color: #28D36E !important;
 }
 
 #img_header{
@@ -56,6 +60,27 @@ body{
 	height: 200px;
 	overflow: hidden;
 }
+
+.sous_menu{
+	position: absolute;
+	list-style-type: none;
+	width: 250px;
+	padding: 0;
+	margin: 2px;
+}
+
+.sous_menu li {
+	float: left;
+	height: 30px;
+	font-size: 20px;
+	background: black;
+	padding: 3px;
+	margin: 1px;
+}
+.sous_menu li a:hover{
+	text-decoration: none;
+}
+
 
 /*HOME*/
 
@@ -148,3 +173,4 @@ body{
 	top: 20px;
 	right: -25px;
 }
+

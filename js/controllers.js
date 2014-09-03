@@ -18,13 +18,6 @@ angular.module('myApp.controllers', [])
 
 	pics.list_pics($scope.weekly.artiste.path_pics).then(function(data){
 		$scope.truc = data.data;
-	}).then(function(){
-		if ($scope.truc == "T") {
-			$scope.weekly.artiste.imgs = ["img/badges/weekly.jpg"];
-		}
-		else{
-			$scope.weekly.artiste.imgs = $scope.truc;
-		}
 	});
 	});
 }])
@@ -42,20 +35,20 @@ angular.module('myApp.controllers', [])
 
 	getData.artistes('').then(function(data){
 		$scope.artistes = data.data;
-	}).then(function(){
-
-	$scope.artistes.forEach(function(i){
-		pics.list_pics(i.path_pics).then(function(data){
-			$scope.truc = data.data;
-		}).then(function(){
-			if ($scope.truc == "T") {
-				i.imgs = ["img/badges/weekly.jpg"];
-			}
-			else{
-				i.imgs = $scope.truc;
-			}
-		});
 	});
+}])
+
+.controller('locauxCtrl', ['pics', 'getData', '$scope', '$routeParams', '$http', '$sce', function(pics, getData, $scope, $routeParams, $http, $sce){
+
+	getData.art_cat(0).then(function(data){
+		$scope.artistes = data.data;
+	});
+}])
+
+.controller('visiteursCtrl', ['pics', 'getData', '$scope', '$routeParams', '$http', '$sce', function(pics, getData, $scope, $routeParams, $http, $sce){
+
+	getData.art_cat(1).then(function(data){
+		$scope.artistes = data.data;
 	});
 }])
 

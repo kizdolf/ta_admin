@@ -19,6 +19,15 @@ angular.module('myApp.routes', ['ngRoute'])
 		controller: 'artistesCtrl'
 	});
 
+	$routeProvider.when('/artistes_locaux', {
+		templateUrl :'views/locaux.html',
+		controller: 'locauxCtrl'
+	});
+
+	$routeProvider.when('/artistes_visiteurs', {
+		templateUrl :'views/visiteurs.html',
+		controller: 'visiteursCtrl'
+	});
 
 	$routeProvider.when('/quartiers', {
 		templateUrl :'views/quartiers.html',

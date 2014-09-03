@@ -34,7 +34,7 @@ class tapdo
 		$this->_querys = $conf->querys;
 	}
 
-	public function new_quartier($name, $path, $text, $url = "")
+	public function new_quartier($name, $path, $text, $url = "", $path_vignette)
 	{
 		$verif_q = "SELECT `id` FROM `quartier` WHERE `name`='$name'";
 		$prep = $this->_con->prepare($verif_q);
@@ -49,12 +49,13 @@ class tapdo
 			"name" => $name
 			,"path" => $path
 			,"text" => $text
-			,"url" => $url);
+			,"url" => $url
+			,"path_vignette" => $path_vignette);
 		$prep->execute($vars);
 		return $this->_con->lastInsertId();
 	}
 
-	public function new_artiste($name, $path, $text, $url = "", $itw)
+	public function new_artiste($name, $path, $text, $url = "", $itw, $path_vignette)
 	{
 		$verif_q = "SELECT `id` FROM `artiste` WHERE `name`='$name'";
 		$prep = $this->_con->prepare($verif_q);
@@ -70,7 +71,8 @@ class tapdo
 			,"path" => $path
 			,"text" => $text
 			,"url" => $url
-			,"itw" => $itw);
+			,"itw" => $itw
+			,"path_vignette" => $path_vignette);
 		$prep->execute($vars);
 		return $this->_con->lastInsertId();
 	}
@@ -172,12 +174,14 @@ class tapdo
 			,"name" => $artiste['name']
 			,"text" =>$artiste['text']
 			,"url" => $artiste['url']
+			,"path_vignette" => $artiste['path_vignette']
 			,"date" => $artiste['date_creation']);
 		$post['quartier'] = array(
 			"id" => $quartier['id']
 			,"path_pics" => $quartier['path_pics']
 			,"name" => $quartier['name']
 			,"text" =>$quartier['text']
+			,"path_vignette" => $quartier['path_vignette']
 			,"url" => $quartier['url']
 			,"date" => $quartier['date_creation']);
 		return $post;
@@ -499,6 +503,22 @@ class tapdo
 		$res = $this->fetch_res($prep);
 		$this->_con->commit();
 		return $res[0];
+	}
+
+	public function get_category($cat)
+	{
+		$this->_con->beginTransaction(); 
+
+		$q = $this->_querys->get->videos_id_artistes_cat;
+		$prep = $this->_con->prepare($q);
+		$prep->execute(array($cat));
+		$res = $this->fetch_res($prep);
+		$this->_con->commit();
+		$arts = array();
+		foreach ($res as $id) {
+			$arts[] = self::get_one_artiste("id", $id['id_artiste']);
+		}
+		return $arts;
 	}
 
 	private function fetch_res($prep)

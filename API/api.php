@@ -153,6 +153,9 @@ Inputs.
 		case 'captcha':
 			captcha_verif($_GET['rep'], $_GET['chal']);
 			break;
+		case 'cat':
+			print_r(json_encode($bdd->get_category($_GET['type'])));
+			break;
 		default:
 			echo "Wrong request";
 			break;

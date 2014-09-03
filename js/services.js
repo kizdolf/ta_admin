@@ -43,6 +43,10 @@
 				return $http.get('API/api.php?get=contact');
 			};
 
+			this.art_cat = function(type){
+				return $http.get('API/api.php?get=cat&type=' + type);
+			};
+
 		}])
 
 		.service('tools',['$http', '$sce', function($http, $sce){
@@ -78,7 +82,7 @@
 
 			this.list_pics = function(path){
 				return $http.get('API/api.php?get=pics&path=' + path);
-			}
+			};
 		}]);
 
 })();

@@ -48,13 +48,13 @@
 					<a href="#/home">accueil</a>
 				</li>
 				<li>
-					<a class='menu_header'>artistes</a>
+					<a href="#/artistes" class='menu_header'>artistes</a>
 					<ul class="sous_menu">
 						<li>
-							<a href="#/artistes/locaux">Locaux</a>
+							<a href="#/artistes_locaux">Locaux</a>
 						</li>
 						<li>
-							<a href="#/artistes/visiteurs">visiteurs</a>
+							<a href="#/artistes_visiteurs">visiteurs</a>
 						</li>
 					</ul>
 				</li>

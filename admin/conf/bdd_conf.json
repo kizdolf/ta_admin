@@ -8,8 +8,8 @@
 	},
 	"querys":{
 		"new":{
-			"quartier" : "INSERT INTO `quartier`(`name`, `path_pics`, `text`, `nb_videos`, `url`) VALUES (:name, :path, :text, 0, :url) "
-			,"artiste" : "INSERT INTO `artiste`(`name`, `path_pics`, `text`, `url`, `itw`) VALUES (:name, :path, :text, :url, :itw) "
+			"quartier" : "INSERT INTO `quartier`(`name`, `path_pics`, `text`, `nb_videos`, `url`, `path_vignette`) VALUES (:name, :path, :text, 0, :url, :path_vignette) "
+			,"artiste" : "INSERT INTO `artiste`(`name`, `path_pics`, `text`, `url`, `itw`, `path_vignette`) VALUES (:name, :path, :text, :url, :itw, :path_vignette)"
 			,"video" : "INSERT INTO `video`(`name`, `url`, `id_artiste`, `id_quartier`, `text`, `weekly`, `category`) VALUES (:name, :url, :id_artiste, :id_quartier, :text, :weekly, :category)"
 			,"user" : "INSERT INTO `user`(`ta_login`, `ta_password`, `mail`, `rights`) VALUES (?, ?, ?, ?)"
 		},
@@ -39,6 +39,7 @@
 			,"short_about" : "SELECT `text` FROM `text` WHERE `name` = 'short_about'"
 			,"team" : "SELECT `text` FROM `text` WHERE `name` = 'team'"
 			,"contact" : "SELECT `text` FROM `text` WHERE `name` = 'contact'"
+			,"videos_id_artistes_cat" : "SELECT `id_artiste` FROM `video` WHERE `category` = ?"
 		},
 		"update":{
 			"quartier_nb" : "UPDATE `quartier` SET `nb_videos`= :new_nb WHERE `id` = :id_quartier"
