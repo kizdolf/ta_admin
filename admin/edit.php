@@ -57,7 +57,7 @@ if ($_GET['type'] == "valid_edit") {
 	$update = "update_one";
 	$entry['date_update'] = date("Y-m-d H:i:s");
 	$bdd->$update($_GET['table'], 'id', $id, $entry);
-	header('Location: index.php?done=edit');
+	// header('Location: index.php?done=edit');
 }
 else{
 	$get = "get_one_".$type;

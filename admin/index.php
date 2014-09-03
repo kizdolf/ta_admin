@@ -9,6 +9,8 @@ require_once(__DIR__."/admin_functions.php");
 $bdd = new tapdo();
 $log = new log();
 $message = "";
+$post = $bdd->get_all_post();
+$post = array_reverse($post);
 
 
 /*
@@ -34,59 +36,16 @@ if (isset($_GET['session']) && $_GET['session'] == "leave") {
 /*
 	NEW ENTRY:
 */
-$post = $bdd->get_all_post();
-$post = array_reverse($post);
-if (isset($_POST['new_quartier'])) {
-	$path = "../portfolio/quartiers/".$_POST['quartier_name'];
-	if (!is_dir($path))
-		mkdir($path);
-	if (isset($_FILES['vignette'])) {
-		$ext = explode(".", $_FILES['vignette']["name"]);
-		$ext = strtolower($ext[1]);
-		$path_vignette = "img/uniques/quartier/".$_POST['quartier_name'].".".$ext;
-	}else{
-		$path_vignette = "";
-	}
- 	pics_handler($_FILES, $path, $_POST['quartier_name']);
-	$id = $bdd->new_quartier($_POST['quartier_name'], $path, $_POST['quartier_desc'], $_POST['quartier_url'], $path_vignette);
-	$message .= "<div class='alert alert-success'>Quartier \"".$_POST['quartier_name']."\" sauvergardé!</div>";
-}
-elseif (isset($_POST['new_post'])) {
-	$path = "../portfolio/artistes/" . $_POST['artiste_name'];
-	if (!is_dir($path))
-		mkdir($path);
-	if (isset($_FILES['vignette'])) {
-		$ext = explode(".", $_FILES['vignette']["name"]);
-		$ext = strtolower($ext[1]);
-		$path_vignette = "img/uniques/artiste/".$_POST['artiste_name'].".".$ext;
-	}else{
-		$path_vignette = "";
-	}
- 	pics_handler($_FILES, $path, $_POST['artiste_name']);
-	$id_a = $bdd->new_artiste($_POST['artiste_name'], $path, $_POST['artiste_desc'], $_POST['artiste_url'], $_POST['itw'], $path_vignette);
-	$weekly = (isset($_POST['weekly']) ? 1 : 0);
-	$category = (isset($_POST['visiteur']) ? 1 : 0);
-	$bdd->new_video($_POST['video_name'], $_POST['video_desc'], $_POST['video_url'], $id_a, $_POST['quartier_id'], $weekly, $category);
-	$message .= "<div class='alert alert-success'><a href='index.php'>Sauvegarde effectuée. Cliquez ici pour actualiser et voir le post apparaitre.</a></div>";
-}
-elseif (isset($_POST['new_profil'])) {
-		$password = hash('whirlpool', $_POST['password']);
-		$bdd->new_user(array($_POST["ta_login"], $password, $_POST["mail"], $_POST["rights"]));
-		header('Location: add_profil.php');
-	}
+$message .= handler_new_entry($bdd, $_POST, $_FILES);
 
 /*
 	HANDLER MESSAGES
 */
-if (isset($_GET['wrong'])) {
-	$message .= "<div class='alert alert-danger'>ERREUR!! Le programme recontre une erreur lors de : <p style='font-weight: bold'>".$_GET['wrong']."</p></div>";
-}
-if (isset($_GET['no'])) {
-	$message .= "<div class='alert alert-danger'>Vous n'avez pas les droits pour ça.</div>";
-}
-if (isset($_GET['done'])){
-	$message .= "<div class='alert alert-success'>".$_GET['done'] . " effectué! </div>";
-}
+$message .= handler_message($_GET);
+
+/*
+	USER
+*/
 if (isset($_COOKIE['session'])) {
 	$cookie = unserialize($_COOKIE['session']);
 	$name = $cookie['user'];

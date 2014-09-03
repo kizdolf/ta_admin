@@ -23,6 +23,7 @@ $alls = $bdd->get_all_names_id();
 			<li><a href="https://trello.com/#">Trello</a></li>
 			<li><a href="https://soundcloud.com/toulouse-acoustics">Souncloud</a></li>
 			<li><a href="edit_texts.php">Editer les textes</a></li>
+			<li><a href="styles.php">Ajouter un style</a></li>
 		</ul>
 		<hr>
 		<h3>Edition rapide</h3>

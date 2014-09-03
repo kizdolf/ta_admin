@@ -43,7 +43,7 @@ function reArrayFiles(&$file_post) {
 			}
 		}
 	}
-	if (isset($vign['vignette'])) {
+	if (isset($vign['vignette']) && $vign['vignette']['name'] != '') {
 		$pic = $vign['vignette'];
 		if (strstr($path, 'quartier')) {
 			$path = "../img/uniques/quartier";
@@ -70,7 +70,7 @@ function html_edit($entry, $id, $type) {
 					echo "<input type='checkbox' name='category' value='1' >Visiteur ? ";
 					break;
 				case 'weekly':
-					echo "<input type='checkbox' name='weekly' value='1' checked>Vidéo de la semaine ";
+					echo "<input type='checkbox' name='weekly' value='1' >Vidéo de la semaine ";
 					break;
 				default:
 					echo "<input type='text' class='input-large' name='$col' value='$val'>";
@@ -88,6 +88,68 @@ function html_edit($entry, $id, $type) {
 	}
 	echo "<br><input type='submit' value='valider'>";
 	echo "</form>";
+}
+
+function handler_new_entry($bdd, $post, $files)
+{
+	$message = "";
+	if (isset($post['new_quartier'])) {
+		$path = "../portfolio/quartiers/".$post['quartier_name'];
+		if (!is_dir($path))
+			mkdir($path);
+		if (isset($files['vignette']) && $files['vignette']['name'] != '') {
+			$ext = explode(".", $files['vignette']["name"]);
+			$ext = strtolower($ext[1]);
+			$path_vignette = "img/uniques/quartier/".$post['quartier_name'].".".$ext;
+		}else{
+			$path_vignette = "";
+		}
+	 	pics_handler($files, $path, $post['quartier_name']);
+		$id = $bdd->new_quartier($post['quartier_name'], $path, $post['quartier_desc'], $post['quartier_url'], $path_vignette);
+		$message .= "<div class='alert alert-success'>Quartier \"".$post['quartier_name']."\" sauvergardé!</div>";
+	}
+	elseif (isset($post['new_post'])) {
+		$path = "../portfolio/artistes/" . $post['artiste_name'];
+		if (!is_dir($path))
+			mkdir($path);
+		if (isset($files['vignette']) && $files['vignette']['name'] != '') {
+			$ext = explode(".", $files['vignette']["name"]);
+			$ext = strtolower($ext[1]);
+			$path_vignette = "img/uniques/artiste/".$post['artiste_name'].".".$ext;
+		}else{
+			$path_vignette = "";
+		}
+	 	pics_handler($files, $path, $post['artiste_name']);
+		$id_a = $bdd->new_artiste($post['artiste_name'], $path, $post['artiste_desc'], $post['artiste_url'], $post['itw'], $path_vignette, $post['style_id']);
+		$weekly = (isset($post['weekly']) ? 1 : 0);
+		$category = (isset($post['visiteur']) ? 1 : 0);
+		$bdd->new_video($post['video_name'], $post['video_desc'], $post['video_url'], $id_a, $post['quartier_id'], $weekly, $category);
+		$message .= "<div class='alert alert-success'><a href='index.php'>Sauvegarde effectuée. Cliquez ici pour actualiser et voir le post apparaitre.</a></div>";
+	}
+	elseif (isset($post['new_profil'])) {
+			$password = hash('whirlpool', $post['password']);
+			$bdd->new_user(array($post["ta_login"], $password, $post["mail"], $post["rights"]));
+			header('Location: add_profil.php');
+		}
+	return $message;
+}
+
+function handler_message($get)
+{
+	$message = "";
+	if (isset($get['wrong'])) {
+		$message .= "<div class='alert alert-danger'>ERREUR!! Le programme recontre une erreur lors de : <p style='font-weight: bold'>".$get['wrong']."</p></div>";
+	}
+	if (isset($get['no'])) {
+		$message .= "<div class='alert alert-danger'>Vous n'avez pas les droits pour ça.</div>";
+	}
+	if (isset($get['done'])){
+		$message .= "<div class='alert alert-success'>".$get['done'] . " effectué! </div>";
+	}
+	if (isset($get['add'])) {
+		$message .= "<div class='alert alert-success'>".$get['add'] . " ". $get['n'] ." ajouté! </div>";
+	}
+	return $message;
 }
 
 ?>

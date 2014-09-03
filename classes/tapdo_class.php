@@ -55,7 +55,7 @@ class tapdo
 		return $this->_con->lastInsertId();
 	}
 
-	public function new_artiste($name, $path, $text, $url = "", $itw, $path_vignette)
+	public function new_artiste($name, $path, $text, $url = "", $itw, $path_vignette, $id_style)
 	{
 		$verif_q = "SELECT `id` FROM `artiste` WHERE `name`='$name'";
 		$prep = $this->_con->prepare($verif_q);
@@ -72,9 +72,12 @@ class tapdo
 			,"text" => $text
 			,"url" => $url
 			,"itw" => $itw
-			,"path_vignette" => $path_vignette);
+			,"path_vignette" => $path_vignette
+			,"id_style" => $id_style);
 		$prep->execute($vars);
-		return $this->_con->lastInsertId();
+		$id_artiste = $this->_con->lastInsertId();
+		self::update_one("style", "nb_artistes")
+		return $id_artiste;
 	}
 
 	public function new_video($name, $text, $url, $id_artiste, $id_quartier, $weekly, $cat)
@@ -120,6 +123,27 @@ class tapdo
 		$prep = $this->_con->prepare($q);
 		$prep->execute($vars);
 
+		$this->_con->commit();
+	}
+
+	public function new_style($name)
+	{
+		$this->_con->beginTransaction();
+		$exist = $this->fetch_res($this->run_q($this->_querys->get->style_by_name, array($name)));
+		if (isset($exist[0])) {
+			$this->_con->commit();
+			return ;
+		}
+		$this->run_q($this->_querys->new->style, array($name));
+		$this->_con->commit();
+	}
+
+	public function new_user($kwarg)
+	{
+		$this->_con->beginTransaction(); 
+		$q = $this->_querys->new->user;
+		$prep=$this->_con->prepare($q);
+		$prep->execute($kwarg);
 		$this->_con->commit();
 	}
 
@@ -399,15 +423,6 @@ class tapdo
 		return $ret;
 	}
 
-	public function new_user($kwarg)
-	{
-		$this->_con->beginTransaction(); 
-		$q = $this->_querys->new->user;
-		$prep=$this->_con->prepare($q);
-		$prep->execute($kwarg);
-		$this->_con->commit();
-	}
-
 	public function get_all_names_id()
 	{
 		$this->_con->beginTransaction(); 
@@ -521,12 +536,27 @@ class tapdo
 		return $arts;
 	}
 
+	public function get_all_styles()
+	{
+		$this->_con->beginTransaction(); 	
+		$res = $this->fetch_res($this->run_q($this->_querys->get->all_styles));
+		$this->_con->commit();
+		return $res;
+	}
+
 	private function fetch_res($prep)
 	{
 		$ret = array();
 		while ($res = $prep->fetch(PDO::FETCH_ASSOC))
 			$ret[] = $res;
 		return $ret;
+	}
+
+	private function run_q($q, $vars = null)
+	{
+		$prep = $this->_con->prepare($q);
+		$prep->execute($vars);
+		return $prep;
 	}
 }
 

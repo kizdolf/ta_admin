@@ -14,7 +14,11 @@ $html = "";
 foreach ($quartiers as $q) {
 	$html .= "<button value='" .  $q['id'] . "' class='quartier_choix btn btn-default'>" . $q['name'] . "</button>";
 }
-
+$styles = $bdd->get_all_styles();
+$stylehtml = "";
+foreach ($styles as $style) {
+	$stylehtml .= "<button value='" .  $style['id'] . "' class='btn btn-default style_choix'>" . $style['name'] . "</button>";
+}
 
 ?>
 
@@ -22,7 +26,7 @@ foreach ($quartiers as $q) {
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Ajouter un post</title>
+	<title>Admin - Ajouter un post</title>
 	<script src="../components/ckeditor/ckeditor.js"></script>
   	<link rel="stylesheet" type="text/css" href="../css/bootstrap/css/bootstrap.min.css">
 	<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
@@ -40,6 +44,19 @@ foreach ($quartiers as $q) {
 			<a class='btn btn-warning' href="new_quartier.php">nouveau</a>
 			<?php echo $html; ?>
 			</div>
+			<h3>Choisir un style pour l'artiste</h3>
+			<div class="btn-group">
+				<button class='btn btn-warning new_style_btn'>nouveau</button>
+				<?php echo $stylehtml; ?>
+			</div>
+			<div id="new_style">
+					<form action="styles.php?from=new_post" method="post">
+						<div id="float_form" class="input-group input-group-lg">
+							<input type="text" class="form-control" name="name" placeholder="Nom du style">
+						</div>
+						<button class="btn btn-success" type="submit" name="new_style">Add it</button>
+					</form>
+			</div>
 		</div>
 	<form method="post" action="./index.php" enctype="multipart/form-data">
 		<input type="hidden" id="quartier_id" name="quartier_id" class="inputc">
@@ -47,6 +64,8 @@ foreach ($quartiers as $q) {
 			<div class='page-header'>
 				<h2>Artiste</h2>
 			</div>
+			
+			<input type="hidden" id="style_id" name="style_id" class="inputc">
 			<input type="text" class="form-control inputc" name="artiste_name" placeholder="nom">
 			<hr>
 			<div id="float_form" class="input-group input-group-lg">
@@ -118,13 +137,27 @@ foreach ($quartiers as $q) {
 		$("#quartier_id").val($val);
 	});
 
-	
+	$(".style_choix").click(function(){
+		$('#new_style').hide();
+		$val = $(this).val();
+		$('.style_choix').each(function(){
+			$(this).removeClass('btn-success')
+		})
+		$(this).addClass('btn-success');
+		$("#style_id").val($val);
+	});
 
 	$('input').keypress(function(){
 		$('.valid').show();
 		$('.alert').hide();
 		$check();
 	});
+
+	$('#new_style').hide();
+
+	$('.new_style_btn').click(function(){
+		$('#new_style').show();
+	})
 
 	</script>
 	</div>
