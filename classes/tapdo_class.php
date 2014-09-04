@@ -23,7 +23,6 @@ class tapdo
 			return false;
 		}
 		return true;
-
 	}
 
 	private function set_conf()
@@ -76,7 +75,7 @@ class tapdo
 			,"id_style" => $id_style);
 		$prep->execute($vars);
 		$id_artiste = $this->_con->lastInsertId();
-		self::update_one("style", "nb_artistes")
+		//self::update_one("style", "nb_artistes");
 		return $id_artiste;
 	}
 
@@ -523,7 +522,6 @@ class tapdo
 	public function get_category($cat)
 	{
 		$this->_con->beginTransaction(); 
-
 		$q = $this->_querys->get->videos_id_artistes_cat;
 		$prep = $this->_con->prepare($q);
 		$prep->execute(array($cat));
@@ -531,9 +529,22 @@ class tapdo
 		$this->_con->commit();
 		$arts = array();
 		foreach ($res as $id) {
-			$arts[] = self::get_one_artiste("id", $id['id_artiste']);
+			$artiste = self::get_one_artiste("id", $id['id_artiste']);
+			$style = self::get_one_style("id", $artiste['id_style']);
+			$arts[] = array("artiste" => $artiste, "style" => $style[0] );
 		}
 		return $arts;
+	}
+
+	public function get_one_style($col, $val)
+	{
+		$this->_con->beginTransaction(); 
+		$q = "one_style_by_".$col;
+		$q = $this->_querys->get->$q;
+		$p = $this->run_q($q, array($val));
+		$res = $this->fetch_res($p);
+		$this->_con->commit();
+		return $res;
 	}
 
 	public function get_all_styles()
@@ -541,6 +552,25 @@ class tapdo
 		$this->_con->beginTransaction(); 	
 		$res = $this->fetch_res($this->run_q($this->_querys->get->all_styles));
 		$this->_con->commit();
+		return $res;
+	}
+
+	public function get_artistes_by_style()
+	{
+		$styles = self::get_all_styles();
+		$arts = array();
+		foreach ($styles as $style) {
+			$arts[] =array("name" => $style['name'], "artistes" =>self::get_all_artistes("style", $style['id']));
+		}
+		return $arts;
+	}
+
+	public function get_all_artistes($col, $val)
+	{
+		$q = "all_artistes_by_".$col;
+		$q = $this->_querys->get->$q;
+		$p = $this->run_q($q, array($val));
+		$res = $this->fetch_res($p);
 		return $res;
 	}
 

@@ -33,8 +33,9 @@ angular.module('myApp.controllers', [])
 
 .controller('artistesCtrl', ['pics', 'getData', '$scope', '$routeParams', '$http', '$sce', function(pics, getData, $scope, $routeParams, $http, $sce){
 
-	getData.artistes('').then(function(data){
+	getData.artistes_by('style').then(function(data){
 		$scope.artistes = data.data;
+		console.log($scope.artistes);
 	});
 }])
 
@@ -42,6 +43,7 @@ angular.module('myApp.controllers', [])
 
 	getData.art_cat(0).then(function(data){
 		$scope.artistes = data.data;
+		console.log(data.data);
 	});
 }])
 
@@ -49,6 +51,7 @@ angular.module('myApp.controllers', [])
 
 	getData.art_cat(1).then(function(data){
 		$scope.artistes = data.data;
+		console.log(data.data);
 	});
 }])
 

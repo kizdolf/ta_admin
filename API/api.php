@@ -156,6 +156,21 @@ Inputs.
 		case 'cat':
 			print_r(json_encode($bdd->get_category($_GET['type'])));
 			break;
+		case 'artistes_by':
+			if (!isset($_GET['col'])) {
+				echo "error in api";
+			}else{
+				switch ($_GET['col']) {
+					case 'style':
+						print_r(json_encode($bdd->get_artistes_by_style()));
+						break;
+					
+					default:
+						echo "colonne non supportée.";
+						break;
+				}
+			}
+			break;
 		default:
 			echo "Wrong request";
 			break;

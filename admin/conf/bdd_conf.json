@@ -41,8 +41,10 @@
 			,"team" : "SELECT `text` FROM `text` WHERE `name` = 'team'"
 			,"contact" : "SELECT `text` FROM `text` WHERE `name` = 'contact'"
 			,"videos_id_artistes_cat" : "SELECT `id_artiste` FROM `video` WHERE `category` = ?"
+			,"all_artistes_by_style" : "SELECT `name`, `path_vignette` FROM `artiste` WHERE `id_style` = ?"
 			,"all_styles": "SELECT * FROM `style` WHERE 1"
 			,"style_by_name": "SELECT `id` FROM `style` WHERE `name` = ?"
+			,"one_style_by_id" : "SELECT * FROM `style` WHERE `id` = ?"
 		},
 		"update":{
 			"quartier_nb" : "UPDATE `quartier` SET `nb_videos`= :new_nb WHERE `id` = :id_quartier"

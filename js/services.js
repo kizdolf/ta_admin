@@ -47,6 +47,10 @@
 				return $http.get('API/api.php?get=cat&type=' + type);
 			};
 
+			this.artistes_by = function(col){
+				return $http.get('API/api.php?get=artistes_by&col=' + col);
+			}
+
 		}])
 
 		.service('tools',['$http', '$sce', function($http, $sce){
