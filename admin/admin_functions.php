@@ -36,6 +36,8 @@ function reArrayFiles(&$file_post) {
 		if ($value["name"] != '') {
 			$ext = explode(".", $value["name"]);
 			$ext = strtolower($ext[1]);
+			while (file_exists($path."/".$name_pic."_$i.".$ext))
+				$i++;
 			$files[$key]["name"] = $name_pic."_$i.".$ext;
 			$i++;
 			if(!($url = save_file($files[$key], $ext, $path))) {
@@ -80,9 +82,11 @@ function html_edit($entry, $id, $type) {
 	}
 	if (isset($type) && !strstr($type, 'video')) {
 		echo "<div id='upload' class='jumbotron'>
-				<h3>Photos</h3>
+				<a class='btn_pics btn btn-default btn-lg'>Voir les photos.</a>
+				<div class='gal_pic'></div><hr style='clear:both;'>
+				<h3>Ajouter des photos</h3>
 				<input type='file' multiple='multiple' name='pics[]' id='pics'> <br>
-				<h3>Vignette Quartier : 220px / 220px</h3>
+				<h3>Changer la vignette  : 220px / 220px</h3>
 				<input type='file' name='vignette' id='vignette'> <br>
 			</div>";
 	}

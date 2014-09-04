@@ -139,12 +139,6 @@ angular.module('myApp.controllers', [])
 		if (e.keyCode == 27) {
 			$('#pics_viewer').hide();
 		}
-		if (e.keyCode == 39) {
-			$scope.next_pic();
-		}
-		if (e.keyCode == 37) {
-			$scope.prev_pic();
-		}
 	});
 }])
 

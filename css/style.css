@@ -177,7 +177,7 @@ body{
 /* portfolio */
 
 #pics_viewer{
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
@@ -203,6 +203,11 @@ body{
 	width: 35px;
 	padding: 10px;
 	background: rgba(0, 0, 0, 0.28);
+}
+
+#pics_viewer .pic_close:hover{
+	background: rgba(255, 255, 255, 0.62);
+	box-shadow: 5px 5px 5px black;
 }
 
 #pics_viewer .prev_pic{

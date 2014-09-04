@@ -77,8 +77,21 @@
 		</div>
 	</div>
 </nav>
+<nav class="navbar navbar-default col-md-2" role="navigation">
+	<ul class="list-group">
+		<li class="list-group-item">
+			<a href="">fb</a>
+		</li>
+		<li class="list-group-item">
+			<a href="">tw</a>
+		</li>
+		<li class="list-group-item">
+			<a href="sound">sound</a>
+		</li>
+	</ul>
+</nav>
 
-<div ng-view style="height:100%;"></div>
+<div ng-view style="height:100%;" class="col-md-10"></div>
 
 
 <!-- <div id="container-fluid" >
@@ -95,6 +108,7 @@
   <script src="js/app.js"></script>
   <script src="js/controllers.js"></script>
   <script src="js/routes.js"></script>
+  <script src="components/purl.js"></script>
   <script src="js/jque.js"></script>
   <script src="css/bootstrap/js/bootstrap.min.js"></script>
   <script src="js/services.js"></script>

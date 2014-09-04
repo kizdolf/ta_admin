@@ -142,3 +142,12 @@ body {
     z-index: 999;
 }
 
+.gal_pic img{
+    width: 200px;
+    height: auto;
+    float: left;
+}
+
+.pic_del{
+    float: left;
+}
