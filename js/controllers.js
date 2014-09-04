@@ -20,6 +20,10 @@ angular.module('myApp.controllers', [])
 		$scope.truc = data.data;
 	});
 	});
+
+	$('body').click(function(){
+		$('.sous_menu').hide();
+	})
 }])
 
 .controller('artisteCtrl', ['tools', 'getData', '$scope', '$routeParams', '$http', '$sce', function(tools, getData, $scope, $routeParams, $http, $sce){
@@ -90,7 +94,7 @@ angular.module('myApp.controllers', [])
 
 .controller('picsCtrl', ['pics', 'getData', '$scope', '$routeParams', '$http', '$sce', function(pics, getData, $scope, $routeParams, $http, $sce){
 
-	$scope.index = 0;
+	$('#pics_viewer').hide();
 
 	getData.artistes('').then(function(data){
 		$scope.artistes = data.data;
@@ -101,13 +105,15 @@ angular.module('myApp.controllers', [])
 	});
 
 	$scope.name_click = function(path){
-		
+		$scope.index = 0;
 		pics.list_pics(path).then(function(data){
 			$scope.pics = data.data;
 			$scope.pic = data.data[$scope.index];
 			$scope.index = $scope.index + 1;
 			if(!angular.isDefined(data.data[$scope.index]))
 				$scope.index = 0;
+		}).then(function(){
+			$('#pics_viewer').show();
 		});
 	};
 
@@ -117,6 +123,29 @@ angular.module('myApp.controllers', [])
 		if(!angular.isDefined($scope.pics[$scope.index]))
 				$scope.index = 0;
 	}
+	$scope.prev_pic = function(){
+		$scope.pic = $scope.pics[$scope.index];
+		$scope.index = $scope.index - 1;
+		if($scope.index < 0)
+			$scope.index = $scope.pics.length - 1;
+	}
+
+	$('.pic_close').click(function(){
+		$('#pics_viewer').hide();
+		$scope.index = 0;
+	});
+
+	$(document).keyup(function(e) {
+		if (e.keyCode == 27) {
+			$('#pics_viewer').hide();
+		}
+		if (e.keyCode == 39) {
+			$scope.next_pic();
+		}
+		if (e.keyCode == 37) {
+			$scope.prev_pic();
+		}
+	});
 }])
 
 .controller('aboutCtrl', ['getData', '$scope', '$sce', function(getData, $scope, $sce){

@@ -9,7 +9,7 @@
 	<h4>{{quartier.name}}</h4></a>
 </div>
 
-<div ng-click="next_pic()">
-<img src="{{ pic }}">
-</div>
+<div id="pics_viewer">
+<span class="pic_close glyphicon glyphicon-remove"></span>
+<span class="prev_pic"  ng-click="prev_pic()"></span><img src="{{ pic }}"><span class="next_pic"  ng-click="next_pic()"></span></div>
 </div>

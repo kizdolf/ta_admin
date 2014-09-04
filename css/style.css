@@ -174,3 +174,52 @@ body{
 	right: -25px;
 }
 
+/* portfolio */
+
+#pics_viewer{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	/* margin-left: 5%; */
+	padding: 15px;
+	background: rgba(0, 0, 0, 0.49);
+	/* align-content: center; */
+}
+
+#pics_viewer img {
+	display: block;
+	max-width: 90%;
+	max-height: 100%;
+	margin: auto;
+	box-shadow: 1px 1px 19px 8px rgb(27, 25, 25);
+}
+
+#pics_viewer .pic_close{
+	position: absolute;
+	right: 2px;
+	top: 4px;
+	height: 35px;
+	width: 35px;
+	padding: 10px;
+	background: rgba(0, 0, 0, 0.28);
+}
+
+#pics_viewer .prev_pic{
+	position: absolute;
+	left: 2px;
+	top: 2px;
+	height: 90%;
+	width: 45%;
+	margin-left: 5%
+}
+
+
+#pics_viewer .next_pic{
+	position: absolute;
+	right: 2px;
+	top: 2px;
+	height: 90%;
+	width: 45%;
+	margin-right: 5%
+}
