@@ -194,6 +194,9 @@ Inputs.
 				}
 			}
 			break;
+		case 'partners':
+			print_r(json_encode($bdd->get_all_partners()));
+			break;
 		default:
 			echo "Wrong request";
 			break;

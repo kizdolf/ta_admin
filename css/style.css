@@ -111,6 +111,7 @@ body{
 	position: relative;
 	width: 220px;
 	height: 220px;
+	z-index: -999;
 }
 
 .div_grid{
@@ -127,7 +128,7 @@ body{
 	font-size: 35px;
 	display: block;
 	position: absolute;
-	z-index: 999;
+	z-index: 0;
 	width: 220px;
 	height: 220px;
 	text-shadow: 3px 2px 4px black;
@@ -227,4 +228,27 @@ body{
 	height: 90%;
 	width: 45%;
 	margin-right: 5%
+}
+
+/*.partner_block{
+	width: 25%;
+	float: left;
+}*/
+
+#playerSound{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+}
+
+.btn_soundcloud{
+	position: fixed;
+	bottom: 0;
+	right: 0;	
+}
+
+#sound{
+	display: block;
+	height: 250px;
+	width: 100%;
 }

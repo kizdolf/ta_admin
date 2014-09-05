@@ -97,10 +97,14 @@
 <!-- <div id="container-fluid" >
 	by DonKino. all rights are reserved but do what you want also :)
 </div> -->
-<!-- 
-<div id="playerSound">
-<iframe width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/49488549&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
-</div> -->
+
+	<div id="sound">
+		<button  class="btn_soundcloud btn btn-default">Show soundcloud!</button>
+		<div id="playerSound">
+		<iframe width="100%" height="100%" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/49488549&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
+		</div>
+	</div>
+
   <script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
   <script src="components/angular.min.js"></script>
   <script src="components/angular_routes.js"></script>

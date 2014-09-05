@@ -53,6 +53,10 @@
 
 			this.one_video = function(id, param){
 				return $http.get('API/api.php?get=video&id=' + id + "&choice=" + param);
+			};
+
+			this.partners = function(){
+				return $http.get('API/api.php?get=partners');
 			}
 
 		}])

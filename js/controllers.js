@@ -31,6 +31,7 @@ angular.module('myApp.controllers', [])
 	$('body').click(function(){
 		$('.sous_menu').hide();
 	});
+
 }])
 
 .controller('artisteCtrl', ['tools', 'getData', '$scope', '$routeParams', '$http', '$sce', function(tools, getData, $scope, $routeParams, $http, $sce){
@@ -204,4 +205,17 @@ angular.module('myApp.controllers', [])
 		});
 	};
 }])
-;
+
+.controller('partnersCtrl', ['$http', 'getData', '$scope', '$sce', function($http, getData, $scope, $sce){
+
+	console.log("coucou");
+	getData.partners().then(function(data){
+		$scope.partners = data.data;
+	}).then(function(){
+		$scope.partners.forEach(function(one){
+			one.desc= $sce.trustAsHtml(one.desc);
+		});
+		console.log($scope.partners);
+	});
+
+}]);

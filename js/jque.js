@@ -34,3 +34,19 @@ $('.sous_menu li a').click(function(){
 $('.menu_ul li a').click(function(){
 	$('.sous_menu').hide();
 });
+
+		// PLAYER SOUNDCLOUD		
+
+
+	$('#playerSound').hide();
+	$('#playerSound').addClass('is_hidden');
+	$('.btn_soundcloud').show();
+	$('.btn_soundcloud').click(function(){
+		if ($('#playerSound').hasClass('is_hidden')) {
+			$('#playerSound').show("slow");
+			$('#playerSound').removeClass('is_hidden');
+		}else{
+			$('#playerSound').addClass('is_hidden');
+			$('#playerSound').hide("slow");
+		}
+	});

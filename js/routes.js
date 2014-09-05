@@ -51,7 +51,7 @@ angular.module('myApp.routes', ['ngRoute'])
 
 	$routeProvider.when('/partners', {
 		templateUrl :'views/partners.html',
-		controller: 'headCtrl'
+		controller: 'partnersCtrl'
 	});
 
 
