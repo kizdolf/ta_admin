@@ -168,3 +168,13 @@ body {
 #block_new_partner{
     margin-top: 45px;
 }
+
+#form_login{
+    /*background: white;*/
+    /*color: white;*/
+    text-align: center;
+}
+
+#body_login{
+    background: rgb(240, 240, 240);
+}
