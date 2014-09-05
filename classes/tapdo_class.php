@@ -601,6 +601,21 @@ class tapdo
 		return $res;
 	}
 
+	/*	DELETE PART 	*/
+
+	public function suppr($table, $col, $val)
+	{
+		if (!is_array($val))
+			$val = array($val);
+		$this->_con->beginTransaction();
+		$q = $table."_by_".$col;
+		$this->run_q($this->_querys->delete->$q, $val);
+		$this->_con->commit();
+	}
+
+
+	/*	PRIVATE FUNCTIONS 	*/
+
 	private function fetch_res($prep)
 	{
 		$ret = array();

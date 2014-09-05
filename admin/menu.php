@@ -24,7 +24,7 @@ $alls = $bdd->get_all_names_id();
 			<li><a href="https://soundcloud.com/toulouse-acoustics">Souncloud</a></li>
 			<li><a href="edit_texts.php">Editer les textes</a></li>
 			<li><a href="styles.php">Ajouter un style</a></li>
-			<li><a href="partners.php">Ajouter un partenaire</a></li>
+			<li><a href="partners.php">Partenaires</a></li>
 		</ul>
 		<hr>
 		<h3>Edition rapide</h3>
@@ -32,7 +32,7 @@ $alls = $bdd->get_all_names_id();
 			<a  class='btn btn-default btn-md' data-toggle="dropdown" href="#">artistes</a>
   			<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
   			<?php foreach ($alls['artistes'] as $artiste) {
-  				echo "<li><a  href='edit.php?type=artiste&id=".$artiste['id']."'>".$artiste['name']."</a>";
+  				echo "<li><a  href='edit.php?type=artiste&id=".$artiste['id']."'>".$artiste['name']."</a></li>";
   			} ?>
   			</ul>
 		</div>
@@ -40,7 +40,7 @@ $alls = $bdd->get_all_names_id();
 			<a  class='btn btn-default btn-md'  data-toggle="dropdown" href="#">quartiers</a>
 			<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 			<?php foreach ($alls['quartiers'] as $quartier) {
-  				echo "<li><a href='edit.php?type=quartier&id=".$quartier['id']."'>".$quartier['name']."</a>";
+  				echo "<li><a href='edit.php?type=quartier&id=".$quartier['id']."'>".$quartier['name']."</a></li>";
   			} ?>
   			</ul>
 		</div>
@@ -48,7 +48,7 @@ $alls = $bdd->get_all_names_id();
 			<a   class='btn btn-default btn-md' data-toggle="dropdown" href="#">videos</a>
 			<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 			<?php foreach ($alls['videos'] as $video) {
-  				echo "<li><a  href='edit.php?type=video&id=".$video['id']."'>".$video['name']."</a>";
+  				echo "<li><a  href='edit.php?type=video&id=".$video['id']."'>".$video['name']."</a></li>";
   			} ?>
   			</ul>
 		</div>

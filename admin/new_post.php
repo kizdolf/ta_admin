@@ -2,13 +2,18 @@
 spl_autoload_register(function ($class) {
 	include __DIR__.'/../classes/' . $class . '_class.php';
 });
+require_once 'admin_functions.php';
 $log = new log();
 
 if (!$log->is_logued()) {
 	header('Location: login.php?case=disconnect');
 }else{
-
 $bdd = new tapdo();
+
+if (rights($bdd) >= 2) {
+	header('Location: index.php?no=fail');
+	exit();
+}
 $quartiers = $bdd->get_all_quartiers_name();
 $html = "";
 foreach ($quartiers as $q) {

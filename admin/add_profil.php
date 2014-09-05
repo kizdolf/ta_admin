@@ -32,8 +32,8 @@ if (!$log->is_logued()) {
 </head>
 <body>
 	<?php include('menu.php'); ?>
-	<div id="message"><?php if(isset($message)){echo "<h4>$message</h4>";} ?></div>
 	<div id="wrapper">
+	<div id="message"><?php if(isset($message)){echo "<h4>$message</h4>";} ?></div>
 	<div class="container" id="block_users">
 	<h2>Admins présents:</h2>
 <?php 

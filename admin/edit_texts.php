@@ -8,12 +8,13 @@ if (!$log->is_logued()) {
 	header('Location: login.php?case=disconnect');
 }else{
 $bdd = new tapdo();
-$cookie = unserialize($_COOKIE['session']);
-$name = $cookie['user'];
-$user = $bdd->get_one_user('ta_login', $name);
-$rights = $user['rights'];
 $message = "";
-if (isset($_POST['submit_text']) && $rights <= 2) {
+$rights = rights($bdd);
+if (isset($_POST['submit_text']) ) {
+	if ($rights > 2) {
+		header('Location: index.php?no=fail');
+		exit();
+	}
 	$bdd->update_one_text($_POST, $user['ta_login']);
 	$message .= "<div class='alert alert-success'>Texte bien modifié! </div>";
 }

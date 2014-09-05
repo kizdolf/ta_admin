@@ -153,6 +153,9 @@ function handler_message($get)
 	if (isset($get['add'])) {
 		$message .= "<div class='alert alert-success'>".$get['add'] . " ". $get['n'] ." ajouté! </div>";
 	}
+	if (isset($get['del'])) {
+		$message .= "<div class='alert alert-info'>".$get['del'] . " ". $get['n'] ." supprimé </div>";
+	}
 	return $message;
 }
 
@@ -165,8 +168,17 @@ function handler_new_partner($post, $files, $bdd)
 		$files['partner_logo']['name'] = $post['partner_name'].".".$ext;
 		save_file($files['partner_logo'], $ext, "../img/uniques/logo");
 		$post['logo_path'] = $path_logo;
+	}else{
+		$post['logo_path'] = "";
 	}
 	$bdd->new_partner($post);
+}
+
+function rights($bdd){
+	$cookie = unserialize($_COOKIE['session']);
+	$name = $cookie['user'];
+	$profil = $bdd->get_one_user('ta_login', $name);
+	return $profil['rights'];
 }
 
 ?>

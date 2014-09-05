@@ -12,17 +12,36 @@ if (!$log->is_logued()) {
 	$cookie = unserialize($_COOKIE['session']);
 	$name = $cookie['user'];
 	$user = $bdd->get_one_user('ta_login', $name);
+	$rights = $user['rights'];
 	$styles = $bdd->get_all_styles();
 	$html = "";
+
 	foreach ($styles as $style) {
-		$html .= "<button value='" .  $style['id'] . "' class='btn btn-default'>" . $style['name'] . "</button>";
+		$html .= "<div class='dropdown pull-left'>";
+		$html .= "	<a href='#' data-toggle='dropdown' class='btn btn-default'>" . $style['name'] . "</a>";
+		$html .= "	<ul class='dropdown-menu' role='menu' aria-labelledby='dLabel'>";
+		$html .= "		<li><a href='styles.php?del=" .  $style['id'] . "&n=" . $style['name'] ."'>Supprimer</a></li>";
+		$html .= "	</ul>";
+		$html .= "</div>";
 	}
 	if (isset($_POST['new_style']) && isset($_POST['name']) && $_POST['name'] != '') {
+		if ($rights > 2) {
+			header('Location: index.php?no=fail');
+			exit();
+		}
 		$bdd->new_style($_POST['name']);
 		if (isset($_GET['from'])) {
 			header('Location: '.$_GET['from'].".php");
 		}else{
 			header('Location: index.php?add=style&n='.$_POST['name']);
+		}
+	}elseif(isset($_GET['del']) && isset($_GET['n'])){
+		if ($rights > 2) {
+			header('Location: index.php?no=fail');
+			exit();
+		}else{
+			$bdd->suppr("style", "id", $_GET['del']);
+			header('Location: index.php?del=style&n='.$_GET['n']);
 		}
 	}
 ?>

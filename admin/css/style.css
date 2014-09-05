@@ -151,3 +151,20 @@ body {
 .pic_del{
     float: left;
 }
+
+#block_edit ul{
+    list-style-type: none;
+}
+
+#block_edit ul li{
+    float: left;
+    margin: 15px;
+}
+
+#block_edit{
+    margin-bottom: 30px;
+}
+
+#block_new_partner{
+    margin-top: 45px;
+}

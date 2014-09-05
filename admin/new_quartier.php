@@ -2,11 +2,18 @@
 spl_autoload_register(function ($class) {
 	include __DIR__.'/../classes/' . $class . '_class.php';
 });
+require_once 'admin_functions.php';
 $log = new log();
+$bdd = new tapdo();
 
 if (!$log->is_logued()) {
 	header('Location: login.php?case=disconnect');
-}else{ ?>
+}else{ 
+	if (rights($bdd) >= 2) {
+		header('Location: index.php?no=fail');
+		exit();
+	}
+?>
 <!DOCTYPE html>
 <html>
 <head>

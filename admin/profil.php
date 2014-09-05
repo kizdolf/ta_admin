@@ -5,7 +5,7 @@ spl_autoload_register(function ($class) {
 $log = new log();
 $bdd = new tapdo();
 $message = "";
-
+$rights
 if (!$log->is_logued()) {
 	header('Location: login.php?case=disconnect');
 }else{
@@ -81,17 +81,16 @@ if (isset($_GET['id'])) {
 			<input type="text" class="form-control" name="mail" placeholder="mail">
 			<input type="password" class="form-control" name="new_password" placeholder="password">
 			<input type="password" class="form-control" name="new_password_verif" placeholder="password_verif">
-		<?php  if ($user['rights'] <= 1) {
-			?>
+		<?php  if ($user['rights'] <= 1) {?>
 			<select class="form-control" name='rights'>
+			<?php if($user['rights'] == 0){ ?>
 			  <option value="0">Full admin</option>
+			<?php } ?>
 			  <option value="1">Admin classique (publication/edition/supression mais pas de création ou supression de compte)</option>
 			  <option value="2">Modificateur (ne peux que modifier les posts)</option>
 			  <option value="3">Voyeur. (ne peux rien faire.)</option>
 			</select>
-			<?php 
-		}?>
-
+		<?php 	}?>
 		</div>
 		<input type="password" class="form-control" name="current_password" placeholder="password actuel">
 		<button class="btn btn-lg btn-success " type="submit" name="up_profil">Valider les modifications</button>

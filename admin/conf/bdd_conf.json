@@ -64,6 +64,10 @@
 		},
 		"user" : {
 			"user_exist" : "SELECT `id` FROM `user` WHERE `ta_login`= :name AND `ta_password` = :hash"
+		},
+		"delete":{
+			"partner_by_id" : "DELETE  FROM `partner` WHERE `id` = ?"
+			,"style_by_id" : "DELETE  FROM `partner` WHERE `id` = ?"
 		}
 	}
 }
