@@ -1,6 +1,7 @@
 <div ng-controller="headCtrl" style="height:100%;">
 
 	<div id="weekly_video" ng-bind-html="weekly.video.frame"></div>
+	<span ng-click="change_video('next')">Next</span><span ng-click="change_video('prev')">Prev</span>
 	<div class="container container-fluid" id="wrapper">
 		<h3>{{weekly.video.name}}</h3>
 		<div class="div_grid" >

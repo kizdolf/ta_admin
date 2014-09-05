@@ -1,21 +1,4 @@
 <?php 
-/*
-Liste input API: 
-
-get_weekly_post => return post of the week.
-
-get_list_quartiers => return list of all quartiers
-
-get_list_artistes => return list of all artistes
-
-get_related_quartier(quartier) => return list of all post related to a quartier
-
-get_related_category(category) => return list of all post related to a category
-
-get_related_artiste(artiste) => return list of all post related to an artist
-
-*/
-
 
 /*
 INIT
@@ -61,6 +44,12 @@ Helpers
 					$artistes[] = $bdd->get_one_artiste("id", $video['id_artiste']);
 				}
 				$related = array("artistes" => $artistes, "videos" => $videos, "quartier" => $quartier);
+				print_r(json_encode($related));
+				break;
+			case 'video':
+				$quartier = $bdd->get_one_quartier($type_id, $id);
+				$artiste = $bdd->get_one_artiste($type_id, $id);
+				$related = array("quartier" => $quartier, "artiste" => $artiste);
 				print_r(json_encode($related));
 				break;
 			default:
@@ -168,6 +157,40 @@ Inputs.
 					default:
 						echo "colonne non supportée.";
 						break;
+				}
+			}
+			break;
+		case 'video':
+			if (!isset($_GET['id']) || !isset($_GET['choice'])) {
+				echo "parameter missing";
+			}else{
+				$ids_vidz = $bdd->count_videos();
+				if ($_GET['choice'] == "next") {
+					foreach ($ids_vidz as $key => $id) {
+						if ($id['id'] == $_GET['id']) {
+							if (isset($ids_vidz[$key + 1])) {
+								print_r(json_encode($bdd->get_one_video('id', $ids_vidz[$key + 1]['id'])));
+								exit();
+							}else{
+								print_r(json_encode($bdd->get_one_video('id', $ids_vidz[0]['id'])));
+								exit();
+							}
+						}
+					}
+					print_r(json_encode($bdd->get_one_video('id', $ids_vidz[0]['id'])));
+					exit();
+				}else{
+					foreach ($ids_vidz as $key => $id) {
+						if ($id['id'] == $_GET['id']) {
+							if (isset($ids_vidz[$key - 1])) {
+								print_r(json_encode($bdd->get_one_video('id', $ids_vidz[$key - 1]['id'])));
+								exit();
+							}else{
+								print_r(json_encode($bdd->get_one_video('id', $ids_vidz[count($ids_vidz) - 1]['id'])));
+								exit();
+							}
+						}
+					}
 				}
 			}
 			break;

@@ -137,6 +137,22 @@ class tapdo
 		$this->_con->commit();
 	}
 
+	public function new_partner($kwarg)
+	{
+		$this->_con->beginTransaction();
+		$exist = $this->fetch_res($this->run_q($this->_querys->get->partner_by_name, array($kwarg['partner_name'])));
+		if (isset($exist[0])) {
+			$this->_con->commit();
+			return ;
+		}
+		$this->run_q($this->_querys->new->partner, array(
+			$kwarg['partner_name']
+			,$kwarg['partner_desc']
+			,$kwarg['partner_url']
+			,$kwarg['logo_path']));
+		$this->_con->commit();
+	}
+
 	public function new_user($kwarg)
 	{
 		$this->_con->beginTransaction(); 
@@ -316,7 +332,10 @@ class tapdo
 		while ($res = $prep->fetch(PDO::FETCH_ASSOC))
 			$ret[] = $res;
 		$this->_con->commit();
-		return($ret[0]);
+		if (isset($ret[0])) {
+			return($ret[0]);
+		}
+		return false;
 	}
 
 	public function get_one_user($col, $val)
@@ -574,6 +593,14 @@ class tapdo
 		return $res;
 	}
 
+	public function get_all_partners()
+	{
+		$this->_con->beginTransaction(); 	
+		$res = $this->fetch_res($this->run_q($this->_querys->get->all_partners));
+		$this->_con->commit();
+		return $res;
+	}
+
 	private function fetch_res($prep)
 	{
 		$ret = array();
@@ -587,6 +614,13 @@ class tapdo
 		$prep = $this->_con->prepare($q);
 		$prep->execute($vars);
 		return $prep;
+	}
+
+	public function count_videos()
+	{
+		$q = "SELECT `id` FROM `video` WHERE 1";
+		$p = $this->run_q($q);
+		return $this->fetch_res($p);
 	}
 }
 

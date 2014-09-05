@@ -49,6 +49,10 @@
 
 			this.artistes_by = function(col){
 				return $http.get('API/api.php?get=artistes_by&col=' + col);
+			};
+
+			this.one_video = function(id, param){
+				return $http.get('API/api.php?get=video&id=' + id + "&choice=" + param);
 			}
 
 		}])

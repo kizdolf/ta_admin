@@ -156,4 +156,17 @@ function handler_message($get)
 	return $message;
 }
 
+function handler_new_partner($post, $files, $bdd)
+{
+	if (isset($files['partner_logo']) && $files['partner_logo']['name'] != '') {
+		$ext = explode(".", $files['partner_logo']["name"]);
+		$ext = strtolower($ext[1]);
+		$path_logo = "img/uniques/logo/".$post['partner_name'].".".$ext;
+		$files['partner_logo']['name'] = $post['partner_name'].".".$ext;
+		save_file($files['partner_logo'], $ext, "../img/uniques/logo");
+		$post['logo_path'] = $path_logo;
+	}
+	$bdd->new_partner($post);
+}
+
 ?>

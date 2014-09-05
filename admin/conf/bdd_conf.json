@@ -13,6 +13,7 @@
 			,"video" : "INSERT INTO `video`(`name`, `url`, `id_artiste`, `id_quartier`, `text`, `weekly`, `category`) VALUES (:name, :url, :id_artiste, :id_quartier, :text, :weekly, :category)"
 			,"user" : "INSERT INTO `user`(`ta_login`, `ta_password`, `mail`, `rights`) VALUES (?, ?, ?, ?)"
 			,"style" : "INSERT INTO `style` (`name`) VALUES (?)"
+			,"partner" : "INSERT INTO `partner` (`name`, `desc`, `url`, `path_logo`) VALUES (?, ?, ?, ?)"
 		},
 		"get":{
 			"all_quartiers_name" : "SELECT `id`, `name` FROM `quartier` WHERE 1"
@@ -43,7 +44,9 @@
 			,"videos_id_artistes_cat" : "SELECT `id_artiste` FROM `video` WHERE `category` = ?"
 			,"all_artistes_by_style" : "SELECT `name`, `path_vignette` FROM `artiste` WHERE `id_style` = ?"
 			,"all_styles": "SELECT * FROM `style` WHERE 1"
+			,"all_partners": "SELECT * FROM `partner` WHERE 1"
 			,"style_by_name": "SELECT `id` FROM `style` WHERE `name` = ?"
+			,"partner_by_name": "SELECT `id` FROM `partner` WHERE `name` = ?"
 			,"one_style_by_id" : "SELECT * FROM `style` WHERE `id` = ?"
 		},
 		"update":{
