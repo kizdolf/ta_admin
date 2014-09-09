@@ -624,7 +624,7 @@ class tapdo
 	{
 		$q = "all_".$table."s";
 		$this->_con->beginTransaction();
-		$res = fetch_res($this->run_q($this->_querys->get->$q));
+		$res = $this->fetch_res($this->run_q($this->_querys->get->$q));
 		$this->_con->commit();
 		return $res;
 	}

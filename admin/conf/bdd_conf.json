@@ -69,7 +69,8 @@
 		},
 		"delete":{
 			"partner_by_id" : "DELETE  FROM `partner` WHERE `id` = ?"
-			,"style_by_id" : "DELETE  FROM `partner` WHERE `id` = ?"
+			,"style_by_id" : "DELETE  FROM `style` WHERE `id` = ?"
+			,"draft_by_id" : "DELETE  FROM `draft` WHERE `id` = ?"
 		}
 	}
 }

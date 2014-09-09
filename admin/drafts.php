@@ -7,18 +7,20 @@ $log = new log();
 if (!$log->is_logued()) {
 	header('Location: login.php?case=disconnect');
 }else{
+	$bdd = new tapdo();
 	if (isset($_POST['get']) && $_POST['get'] ="drafts") {
 		$drafts = $bdd->get_all('draft');
-	}
-
-	if (!isset($_POST['name']) || !isset($_POST['txt'])) {
+		print_r(json_encode($drafts));
+	}elseif(isset($_POST['del'])){
+		$bdd->suppr('draft', 'id', $_POST['del']);
+	}elseif (!isset($_POST['name']) || !isset($_POST['txt'])) {
 		header('Location: index.php?wrong=params drafts ajax');
+	}else{
+		$cookie = unserialize($_COOKIE['session']);
+		$name = $cookie['user'];
+		$kwarg = array($name, $_POST['name'], $_POST['txt']);
+		$bdd->new_draft($kwarg);
 	}
-	$bdd = new tapdo();
-	$cookie = unserialize($_COOKIE['session']);
-	$name = $cookie['user'];
-	$kwarg = array($name, $_POST['name'], $_POST['txt']);
-	$bdd->new_draft($kwarg);
 ?>
 
 <?php } ?>

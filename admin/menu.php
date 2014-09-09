@@ -59,17 +59,20 @@ $alls = $bdd->get_all_names_id();
 			<button class="btn btn-default draft">Notes publiques</button>
 		</div>
 </div>
-<div id="drafts">
+<div id="drafts" style="display:none;">
 	<button class="btn btn-default btn-xs add_draft">Ajouter une note</button>
+	<button class="btn btn-warning btn-xs hide_drafts">Fermer (Esc)</button>
 	<div id="form_draft">
-		<form method="post" action="./drafts.php" id="send_draft">
-			<input type="text" class="form-control" name="draft_name" placeholder="nom">
-			<textarea id="ck_b" name="draft" rows="5" cols="30" class="form-control"></textarea>
+		<form method="post" action="./drafts.php" id="send_draft" style="width:50%; min-width: 350px;">
+			<input type="text" name="draft_name" placeholder="nom">
+			<textarea id="ck_b" name="draft" rows="5" cols="30"></textarea>
 			<script>CKEDITOR.replace( 'ck_b' );</script>
 			<div id="sub_form">
-				<button class="btn btn-lg btn-success valid" type="submit" name="new_partner">Add it</button>
+				<button class="btn btn-success valid" type="submit" name="new_partner">Add it</button>
 			</div>
 		</form>
+	</div>
+	<div id="drafts_list">
 	</div>
 </div>
 <script src="../components/jquery.js"></script>
@@ -78,9 +81,27 @@ $alls = $bdd->get_all_names_id();
 <script type="text/javascript">
 	$( document ).ready(function(){
 		$("#drafts").hide(0);
+
+		
+
+		$get_drafts = function(){
+			$.post('drafts.php', {get: "drafts"}).done(function(data){
+			$drafts  = jQuery.parseJSON(data);
+			console.log($drafts);
+			}).then(function(){
+				for (var i = $drafts.length - 1; i >= 0; i--) {
+					$("#drafts_list").append("<div class='one_draft'> <button class='btn btn-warning btn-xs suppr_draft' onclick='$del_draft(" + $drafts[i].id + ")' >Supprimer</button> <h2>" + $drafts[i].name + "</h2><hr><h4> By : " + $drafts[i].user + "</h4><span class='date'>Le " + $drafts[i].date_creation + "</span><hr><div class='text_draft'> "+ $drafts[i].txt + "</div></div>");
+				}
+			});
+		}
+
 		$(".draft").click(function(){
+			$get_drafts();
 			$("#form_draft").hide(0);
 			$("#drafts").show("slow");
+			$('html, body').animate({
+				scrollTop: $("#drafts").offset().top
+			}, 500);
 		});
 
 		$(document).keyup(function(e) {
@@ -90,16 +111,40 @@ $alls = $bdd->get_all_names_id();
 		});
 
 		$('.add_draft').click(function(){
-			$("#form_draft").show('5000');
+			if ($("#form_draft").is(":visible")) {
+				$('.add_draft').html("Nouvelle note");
+				$("#form_draft").hide(0);
+			}else{
+				$('.add_draft').html("cacher");
+				$("#form_draft").show("slow");
+			}
 		});
 		$('#send_draft').submit(function( event ) { 
 			event.preventDefault();
 			$name = $('input').val();
 			$txt = $('textarea').val();
 			$txt = $('textarea').val();
+			$txt = $('textarea').val();
 			$.post('drafts.php', {name: $name, txt: $txt}).done(function(data){
-				console.log(data);
-			})
+				$("#drafts_list").html("");
+				$get_drafts();
+				$('.add_draft').html("Nouvelle note");
+				$("#form_draft").hide(0);
+			});
 		}); 
+
+		$('.hide_drafts').click(function(){
+			$('#drafts').hide("slow");
+		});
+
+		$del_draft = function(id){
+			console.log("draft id " + id + " need to be removed.");
+			$.post('drafts.php', {del: id}).done(function(){
+				$("#drafts_list").html("");
+				$get_drafts();
+				$('.add_draft').html("Nouvelle note");
+				$("#form_draft").hide(0);
+			});
+		}
 	});
 </script>
