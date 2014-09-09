@@ -75,13 +75,13 @@ if (isset($_COOKIE['session'])) {
 			foreach ($post as $p) {
 				echo "<div id='post' >";
 				if ($p['video']['weekly'] == 1) {
-					echo "<span class='weekly'><img src='img/weekly.jpg'></span>";
+					echo "<span class='weekly'><img src='img/weekly.png'></span>";
 				}
 				if ($p['video']['category'] == 1) {
-					echo "<span class='weekly'><img src='img/visiteur.jpg'><p>Visiteur</p></span>";
+					echo "<span class='visit'><img src='img/visiteur.jpg'><p>Visiteur</p></span>";
 				}
 				else{
-					echo "<span class='weekly'><img src='img/local.jpg'><p>Local</p></span>";
+					echo "<span class='visit'><img src='img/local.jpg'><p>Local</p></span>";
 				}
 				echo "<div class='page-header'>";
    				echo "<h3>".$p['artiste']['name'];
@@ -91,8 +91,8 @@ if (isset($_COOKIE['session'])) {
 				echo "<button class='btn btn-default btn-xs get_vid'>Récupérer la vidéo</button><div class='frame'>".$p['video']['url']."</div>";
 				if ($rights < 3) {
 					echo "<br><a id='edit_btn' href='edit.php?type=video&id=".$p['video']['id']."' class='btn btn-info'><span class='glyphicon glyphicon-th'></span>Modifier la vidéo</a>";
-					echo "<br><a id='edit_btn' href='edit.php?type=artiste&id=".$p['artiste']['id']."'class='btn btn-info'><span class='glyphicon glyphicon-th'></span>Editer l'artiste</a>";
-					echo "<br><a id='edit_btn' href='edit.php?type=quartier&id=".$p['quartier']['id']."'class='btn btn-info'><span class='glyphicon glyphicon-th'></span>Editer le quartier</a>";
+					echo "<a id='edit_btn' href='edit.php?type=artiste&id=".$p['artiste']['id']."'class='btn btn-info'><span class='glyphicon glyphicon-th'></span>Editer l'artiste</a>";
+					echo "<a id='edit_btn' href='edit.php?type=quartier&id=".$p['quartier']['id']."'class='btn btn-info'><span class='glyphicon glyphicon-th'></span>Editer le quartier</a>";
 				}
 				echo "</div><hr>";
 			}

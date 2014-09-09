@@ -1,5 +1,7 @@
 <?php 
-
+spl_autoload_register(function ($class) {
+	include __DIR__.'/../classes/' . $class . '_class.php';
+});
 //constantes.
 $mainDir = __DIR__."/../data";
 $ext_ok = array("jpg", "png", "gif");
@@ -55,8 +57,10 @@ function reArrayFiles(&$file_post) {
 		$ext = explode(".", $pic["name"]);
 		$ext = strtolower($ext[1]);
 		$pic['name'] = $name_pic.".".$ext;
-		save_file($pic, $ext, $path);
+		return save_file($pic, $ext, $path);
+		
 	}
+	return false;
 }
 function html_edit($entry, $id, $type) {
 	echo "<form action='edit.php?type=valid_edit&id=$id&table=$type' method='post' enctype='multipart/form-data'>";

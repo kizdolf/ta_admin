@@ -20,6 +20,35 @@ $rights = $user['rights'];
 if ($rights > 2) {
 	header('Location: index.php?no=rights');
 }
+if ($_GET['type'] == "valid_edit") {
+	$get = "get_one_".$_GET['table'];
+	$entry = $bdd->$get('id', $id);
+	if(isset($entry['path_pics'])){
+		if (!is_dir($entry['path_pics']))
+			mkdir($entry['path_pics']);
+		$test = pics_handler($_FILES, $entry['path_pics'], $entry['name']);
+		if (isset($_FILES['vignette']) && $_FILES['vignette']['name'] != '') {
+			$ext = explode(".", $_FILES['vignette']["name"]);
+			$ext = strtolower($ext[1]);
+			$entry['path_vignette'] = "img/uniques/artiste/".$entry['name'].".".$ext;
+		}
+	}
+	foreach ($_POST as $key => $value) {
+		if (isset($entry[$key])) {
+			$entry[$key] = $value;
+		}
+	}
+	if (isset($entry['weekly']) && !isset($_POST['weekly'])) {
+		$entry['weekly'] = 0;
+	}
+	if (isset($entry['category']) && !isset($_POST['category'])) {
+		$entry['category'] = 0;
+	}
+	$update = "update_one";
+	$entry['date_update'] = date("Y-m-d H:i:s");
+	$bdd->$update($_GET['table'], 'id', $id, $entry);
+	header('Location: index.php?done=edit');
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -39,29 +68,6 @@ if ($rights > 2) {
 	<?php include('menu.php'); ?>
 	<div id="wrapper">
 <?php
-if ($_GET['type'] == "valid_edit") {
-	$get = "get_one_".$_GET['table'];
-	$entry = $bdd->$get('id', $id);
-	if(isset($entry['path_pics'])){
-		if (!is_dir($entry['path_pics']))
-			mkdir($entry['path_pics']);
-		pics_handler($_FILES, $entry['path_pics'], $entry['name']);
-	}
-	foreach ($_POST as $key => $value) {
-		if (isset($entry[$key])) {
-			$entry[$key] = $value;
-		}
-	}
-	if (isset($entry['weekly']) && !isset($_POST['weekly'])) {
-		$entry['weekly'] = 0;
-	}
-	if (isset($entry['category']) && !isset($_POST['category'])) {
-		$entry['category'] = 0;
-	}
-	$update = "update_one";
-	$entry['date_update'] = date("Y-m-d H:i:s");
-	$bdd->$update($_GET['table'], 'id', $id, $entry);
-	header('Location: index.php?done=edit');
 }
 else{
 	$get = "get_one_".$type;

@@ -63,6 +63,7 @@
 			,"short_about" : "UPDATE `text` SET `text` = ?, `name_admin`= ? WHERE `name` = 'short_about'"
 			,"team" : "UPDATE `text` SET `text` = ?, `name_admin`= ? WHERE `name` = 'team'"
 			,"contact" : "UPDATE `text` SET `text` = ?, `name_admin`= ? WHERE `name` = 'contact'"
+			,"path_vign": "UPDATE `artiste` SET `path_vignette`= :path WHERE `name`= :name"
 		},
 		"user" : {
 			"user_exist" : "SELECT `id` FROM `user` WHERE `ta_login`= :name AND `ta_password` = :hash"

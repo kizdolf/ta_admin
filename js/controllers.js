@@ -87,7 +87,7 @@ angular.module('myApp.controllers', [])
 			$scope.truc = data.data;
 		}).then(function(){
 			if ($scope.truc == "T") {
-				i.imgs = ["img/badges/weekly.jpg"];
+				i.imgs = ["img/badges/weekly.png"];
 			}
 			else{
 				i.imgs = $scope.truc;
@@ -114,25 +114,23 @@ angular.module('myApp.controllers', [])
 		pics.list_pics(path).then(function(data){
 			$scope.pics = data.data;
 			$scope.pic = data.data[$scope.index];
-			$scope.index = $scope.index + 1;
-			if(!angular.isDefined(data.data[$scope.index]))
-				$scope.index = 0;
 		}).then(function(){
 			$('#pics_viewer').show();
 		});
 	};
 
 	$scope.next_pic = function(){
-		$scope.pic = $scope.pics[$scope.index];
 		$scope.index = $scope.index + 1;
 		if(!angular.isDefined($scope.pics[$scope.index]))
 				$scope.index = 0;
-	}
-	$scope.prev_pic = function(){
 		$scope.pic = $scope.pics[$scope.index];
+	}
+
+	$scope.prev_pic = function(){
 		$scope.index = $scope.index - 1;
 		if($scope.index < 0)
 			$scope.index = $scope.pics.length - 1;
+		$scope.pic = $scope.pics[$scope.index];
 	}
 
 	$('.pic_close').click(function(){

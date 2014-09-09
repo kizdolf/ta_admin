@@ -25,10 +25,9 @@
 <noscript><p><img src="http://localhost/public/adminta/components/piwik/piwik/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
 <!-- End Piwik Code -->
 <body>
-<div class="container container-fluid">
   <div id="header">
   	<a href="#/home" id="img_header">
-  		<img src="img/headers/header.jpg" id="img_header">
+  		<img src="img/headers/home.jpg" id="img_header">
   	</a>
   </div>
   <!-- Nouveau Menu responsive: -->
@@ -45,7 +44,7 @@
 		<div class="collapse navbar-collapse" id="list_items_menu">
 			<ul class="nav navbar-nav menu_ul">
 				<li>
-					<a href="#/home">accueil</a>
+					<a href="#/home" class="active">accueil</a>
 				</li>
 				<li>
 					<a href="#/artistes" class='menu_header'>artistes</a>
@@ -90,8 +89,9 @@
 		</li>
 	</ul>
 </nav>
+<div class="container container-fluid">
 
-<div ng-view style="height:100%;" class="col-md-10"></div>
+<div ng-view style="height:100%;"></div>
 
 
 <!-- <div id="container-fluid" >

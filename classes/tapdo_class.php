@@ -629,6 +629,17 @@ class tapdo
 		return $res;
 	}
 
+	public function update_vign_name($path, $name)
+	{
+		echo "<pre>";
+		print_r($path);
+		print_r($name);
+		echo "</pre>";
+		$this->_con->beginTransaction();
+		$this->run_q($this->_querys->update->path_vign, array("path" => $path, "name" => $name));	
+		$this->_con->commit();
+	}
+
 	/*	PRIVATE FUNCTIONS 	*/
 
 	private function fetch_res($prep)
