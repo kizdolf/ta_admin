@@ -139,7 +139,7 @@ body {
     position: relative;
     left: 45%;
     top: 45%;
-    z-index: 999;
+    z-index: 3;
 }
 
 .gal_pic img{
@@ -200,7 +200,7 @@ body {
 }
 
 #drafts{
-	z-index: 999999;
+	z-index: 4;
 	display: block;
 	position: absolute;
 	top: 0;
