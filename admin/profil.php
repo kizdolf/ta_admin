@@ -5,7 +5,6 @@ spl_autoload_register(function ($class) {
 $log = new log();
 $bdd = new tapdo();
 $message = "";
-$rights
 if (!$log->is_logued()) {
 	header('Location: login.php?case=disconnect');
 }else{

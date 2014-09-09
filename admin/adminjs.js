@@ -40,3 +40,9 @@ $(document).on('click', ".pic_del", function(){
 		$get_those_pics();
 	})
 });
+
+$(document).on('click', ".valid", function(){
+
+	$(this).html("<img src='img/miniloader.gif>");
+
+});

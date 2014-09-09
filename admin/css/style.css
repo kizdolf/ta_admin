@@ -178,3 +178,35 @@ body {
 #body_login{
     background: rgb(240, 240, 240);
 }
+
+.wra_img{
+    display: -webkit-inline-box;
+    height: 220px;
+}
+
+.gal_pic2 img{
+    width: 200px;
+    height: auto;
+}
+.pic_del2{
+    float: right;
+}
+#img_div2{
+    margin: 15px;
+    padding: 5px;
+    width: 77%;
+    float: right;
+    box-shadow: 2px 0px 11px 0px rgba(185, 185, 185, 0.79);
+}
+
+#drafts{
+	z-index: 999999;
+	display: block;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	min-height: 100vw;
+	border: 1px solid black;
+	background: rgba(255, 255, 255, 0.83);
+}

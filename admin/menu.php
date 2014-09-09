@@ -25,6 +25,8 @@ $alls = $bdd->get_all_names_id();
 			<li><a href="edit_texts.php">Editer les textes</a></li>
 			<li><a href="styles.php">Ajouter un style</a></li>
 			<li><a href="partners.php">Partenaires</a></li>
+			<li><a href="pics.php?show=team">Galerie équipe</a></li>
+			<li><a href="pics.php?show=off">Galerie 'off'</a></li>
 		</ul>
 		<hr>
 		<h3>Edition rapide</h3>
@@ -57,6 +59,47 @@ $alls = $bdd->get_all_names_id();
 			<button class="btn btn-default draft">Notes publiques</button>
 		</div>
 </div>
+<div id="drafts">
+	<button class="btn btn-default btn-xs add_draft">Ajouter une note</button>
+	<div id="form_draft">
+		<form method="post" action="./drafts.php" id="send_draft">
+			<input type="text" class="form-control" name="draft_name" placeholder="nom">
+			<textarea id="ck_b" name="draft" rows="5" cols="30" class="form-control"></textarea>
+			<script>CKEDITOR.replace( 'ck_b' );</script>
+			<div id="sub_form">
+				<button class="btn btn-lg btn-success valid" type="submit" name="new_partner">Add it</button>
+			</div>
+		</form>
+	</div>
 </div>
 <script src="../components/jquery.js"></script>
 <script src="../css/bootstrap/js/bootstrap.min.js"></script>
+ <script src="http://malsup.github.com/jquery.form.js"></script> 
+<script type="text/javascript">
+	$( document ).ready(function(){
+		$("#drafts").hide(0);
+		$(".draft").click(function(){
+			$("#form_draft").hide(0);
+			$("#drafts").show("slow");
+		});
+
+		$(document).keyup(function(e) {
+			if (e.keyCode == 27) {
+				$('#drafts').hide("slow");
+			}
+		});
+
+		$('.add_draft').click(function(){
+			$("#form_draft").show('5000');
+		});
+		$('#send_draft').submit(function( event ) { 
+			event.preventDefault();
+			$name = $('input').val();
+			$txt = $('textarea').val();
+			$txt = $('textarea').val();
+			$.post('drafts.php', {name: $name, txt: $txt}).done(function(data){
+				console.log(data);
+			})
+		}); 
+	});
+</script>

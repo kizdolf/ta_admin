@@ -66,7 +66,7 @@ foreach ($users as $user) {
 			break;
 	}
 	if($profil['rights'] == 0){
-		echo "<br><a href='profil?id=".$user['id']."'>Modifier le profil</a>";
+		echo "<br><a href='profil.php?id=".$user['id']."'>Modifier le profil</a>";
 	}
 	echo "</div><hr>";
  }

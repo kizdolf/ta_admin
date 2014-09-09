@@ -64,6 +64,7 @@ if (isset($_COOKIE['session'])) {
 	<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
   	<link rel="stylesheet" type="text/css" href="../css/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
+	<script src="../components/ckeditor/ckeditor.js"></script>
 	<script src="../components/jquery.js"></script>
 </head>
 <body>

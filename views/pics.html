@@ -8,7 +8,8 @@
 	<a ng-click="name_click(quartier.path_pics)">
 	<h4>{{quartier.name}}</h4></a>
 </div>
-
+<h1 ng-click="name_click('../portfolio/team')">Team</h1>
+<h1 ng-click="name_click('../portfolio/off')">off</h1>
 <div id="pics_viewer">
 <span class="pic_close glyphicon glyphicon-remove"></span>
 <span class="prev_pic"  ng-click="prev_pic()"></span><img src="{{ pic }}"><span class="next_pic"  ng-click="next_pic()"></span></div>

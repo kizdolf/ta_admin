@@ -162,6 +162,13 @@ class tapdo
 		$this->_con->commit();
 	}
 
+	public function new_draft($kwarg)
+	{
+		$this->_con->beginTransaction(); 
+		$this->run_q($this->_querys->new->draft, $kwarg));
+		$this->_con->commit();
+	}
+
 	public function get_all_quartiers_name()
 	{
 		$q = $this->_querys->get->all_quartiers_name;
@@ -613,6 +620,14 @@ class tapdo
 		$this->_con->commit();
 	}
 
+	public function get_all($table)
+	{
+		$q = "all_".$table."s";
+		$this->_con->beginTransaction();
+		$res = fetch_res($this->run_q($this->_querys->get->$q));
+		$this->_con->commit();
+		return $res;
+	}
 
 	/*	PRIVATE FUNCTIONS 	*/
 

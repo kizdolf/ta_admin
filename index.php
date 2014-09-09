@@ -77,7 +77,7 @@
 		</div>
 	</div>
 </nav>
-<nav class="navbar navbar-default col-md-2" role="navigation">
+<nav class="navbar navbar-default col-md-2" role="navigation" style="display: none;">
 	<ul class="list-group">
 		<li class="list-group-item">
 			<a href="">fb</a>
