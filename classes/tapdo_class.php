@@ -165,7 +165,7 @@ class tapdo
 	public function new_draft($kwarg)
 	{
 		$this->_con->beginTransaction(); 
-		$this->run_q($this->_querys->new->draft, $kwarg));
+		$this->run_q($this->_querys->new->draft, $kwarg);
 		$this->_con->commit();
 	}
 

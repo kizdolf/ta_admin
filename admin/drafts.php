@@ -20,3 +20,5 @@ if (!$log->is_logued()) {
 	$kwarg = array($name, $_POST['name'], $_POST['txt']);
 	$bdd->new_draft($kwarg);
 ?>
+
+<?php } ?>
